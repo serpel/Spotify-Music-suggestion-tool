@@ -14,10 +14,6 @@ app.get("/v1/login", function(req, res){
 
 })
 
-app.get("/v1/login", function(req, res){
-
-})
-
 app.post("/v1/playlist/new", function(req, res){
 
 })
