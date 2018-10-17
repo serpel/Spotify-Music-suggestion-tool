@@ -1,0 +1,20 @@
+{
+  "name": "music-suggestion-tool-api",
+  "version": "1.0.0",
+  "description": "Music Suggestion tool api",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/serpel/Spotify-Music-suggestion-tool"
+  },
+  "keywords": [
+    "react",
+    "spotify",
+    "suggestion"
+  ],
+  "author": "Sergio Peralta",
+  "license": "MIT"
+}
