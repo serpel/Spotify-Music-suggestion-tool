@@ -13,11 +13,9 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing.unit * 2,
     },
-    header: {
-        
+    header: {      
     },  
     playlist: {
-
     },
 });
 
@@ -33,7 +31,6 @@ class PlaylistComponent extends React.Component {
     }
 
     getRecomendationList(){
-
         var url = ``;
         console.log(`Called : ${url}`);
         //axios
