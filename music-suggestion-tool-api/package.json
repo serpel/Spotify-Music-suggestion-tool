@@ -16,5 +16,11 @@
     "suggestion"
   ],
   "author": "Sergio Peralta",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0"
+  }
 }
