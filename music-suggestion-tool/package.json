@@ -27,5 +27,20 @@
   ],
   "devDependencies": {
     "react-test-renderer": "^16.5.2"
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "github.com/serpel/Spotify-Music-suggestion-tool"
+  },
+  "keywords": [
+    "spotify",
+    "suggestion",
+    "tool",
+    "music",
+    "react"
+  ],
+  "author": "Sergio Peralta",
+  "license": "MIT"
 }
