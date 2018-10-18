@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import axios from 'axios';
+import Paper from '@material-ui/core/Paper';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableHead';
+import TableCell from '@material-ui/core/TableCell';
+import Button from '@material-ui/core/Button'
+
+import Spotify from '../Services/Spotify';
+import queryString from 'query-string'
 
 const styles = theme => ({
     root: {
@@ -21,19 +30,32 @@ const styles = theme => ({
 
 
 class PlaylistComponent extends React.Component {
+
+    spotify = {};
+
     constructor(props){
         super(props);
+
+        const values = queryString.parse(this.props.location.search);
+        var token = values.access_token;
 
         this.state = {
             items: [],
             alertMessage: false,
+            token: token,
         }
+
+        this.spotify = Spotify.create(process.env.REACT_APP_SPOTIFY_API, token)
     }
 
     getRecomendationList(){
-        var url = ``;
-        console.log(`Called : ${url}`);
-        //axios
+        const result = this.spotify.getMe();
+        console.log(result);
+    }
+
+    getProfile(){
+        const result = this.spotify.getMe();
+        console.log(result);
     }
 
     onHandleGenerateRecomendationList = () => {
@@ -41,7 +63,8 @@ class PlaylistComponent extends React.Component {
     }
 
     componentDidMount(){
-        this.getRecomendationList();
+        this.getProfile();
+        this.getRecomendationList();      
     }
 
     render() {
@@ -59,15 +82,15 @@ class PlaylistComponent extends React.Component {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {items.map(row => {
+                    {this.state.items.map(row => {
                         return (
                         <TableRow key={row.id}>
                             <TableCell numeric>{row.Tittle}</TableCell>
                             <TableCell component="th" scope="row">{row.Album}</TableCell>
                             <TableCell numeric>
-                                <Buttom>
+                                <Button>
                                     Play
-                                </Buttom>
+                                </Button>
                             </TableCell>
                         </TableRow>
                         );
@@ -79,7 +102,7 @@ class PlaylistComponent extends React.Component {
     }
 }
 
-PlaylistComponent.PropTypes = {
+PlaylistComponent.propTypes = {
     classes: PropTypes.object.isRequired, 
 }
 

@@ -27,11 +27,12 @@ var generateRandomString = function(length) {
   };
   
 var stateKey = 'spotify_auth_state';
+var access_token_key = 'access_token';
+var refresh_token_key = 'refresh_token';
 
 var app = express();
 
-app.use(express.static(__dirname + '/public'))
-   .use(cors())
+app.use(cors())
    .use(cookieParser());
 
 var server = app.listen(8888, function(){
@@ -40,17 +41,34 @@ var server = app.listen(8888, function(){
         throw result.error
     }
  
-    console.log(result.parsed)
-    //console.log(`client_id: ${client_id}, client_secret: ${client_secret}, redirect_uri: ${redirect_uri}`);
+
+    //see my env file
+    console.log(result.parsed);
     console.log(`server running at - ${server.address().address}:${server.address().port}`);
+    //console.log(`Cookies: ${req.cookies}`);
+    
 })
 
-app.get("/", function(){
 
-})
+
+app.get('/', function (req, res) {
+    console.log('Cookies: ', req.cookies)
+});
+
+/*
+//handle error
+app.use(function(err, req, res, next){
+    console.error(err.stack);
+    app.status(500).render('500');
+    
+})*/
+
+app.get('/clear_access_token', function(req, res){
+    res.clearCookie('access_token');
+    res.send('cookie access_token cleared');
+});
 
 app.get("/v1/login", function(req, res){
-
     var state = generateRandomString(16);
     res.cookie(stateKey, state);
 
@@ -63,7 +81,7 @@ app.get("/v1/login", function(req, res){
         scope: scope,
         redirect_uri: redirect_uri,
         state: state
-        }));
+    }));
 })
 
 app.get('/callback', function(req, res) {
@@ -110,13 +128,18 @@ app.get('/callback', function(req, res) {
           request.get(options, function(error, response, body) {
             console.log(body);
           });
-  
+
           // we can also pass the token to the browser to make requests from there
+          res.redirect('http://localhost:3000/playlist?'+ querystring.stringify({
+            access_token: access_token,
+            refresh_token: refresh_token
+          }));
+          /*
           res.redirect('/#' +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token
-            }));
+            }));*/
         } else {
           res.redirect('/#' +
             querystring.stringify({
@@ -127,8 +150,7 @@ app.get('/callback', function(req, res) {
     }
 });
 
-app.get('/refresh_token', function(req, res) {
-
+app.get('/v1/refresh_token', function(req, res) {
     // requesting access token from refresh token
     var refresh_token = req.query.refresh_token;
     var authOptions = {
@@ -151,14 +173,7 @@ app.get('/refresh_token', function(req, res) {
     });
 });
 
-app.post("/v1/playlist/new", function(req, res){
-
-})
-
-app.put("/v1/playlist/:id", function(req, res){
-
-})
-
-app.get("/v1/player/play/:trackId", function(req, res){
-
+//error handling 
+app.get("/v1/fail", function(req, res){
+    throw new Error("Nope!");
 })

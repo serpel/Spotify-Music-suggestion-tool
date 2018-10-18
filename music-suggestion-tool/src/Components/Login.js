@@ -43,6 +43,7 @@ class LoginComponent extends React.Component {
 
     onLoginSubmitHandler = (event) => {
         event.preventDefault();
+        window.location.href = "http://localhost:8888/v1/login"
     }
 
     render(){
@@ -60,7 +61,7 @@ class LoginComponent extends React.Component {
                     </Grid>
                     <Grid item xs={1} sm container className={classes.container}>
                         <form onSubmit={this.onLoginSubmitHandler}>
-                            <Button variant="contained" color="default" type="submit" className={classes.button}>
+                            <Button variant="contained" color="default" type="submit" className={classes.button} >
                                 <img src={SpotifyIcon} alt="spotify" className={classes.extendedIcon} />
                                 Login With Spotify
                             </Button>

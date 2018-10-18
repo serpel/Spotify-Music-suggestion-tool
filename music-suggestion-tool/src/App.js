@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Home from './Components/Home'
+import Playlist from './Components/Playlist'
 import Login from './Components/Login'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,7 +11,7 @@ class App extends Component {
         <React.Fragment>
         <CssBaseline />
           <div>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/playlist" component={Playlist}/>
             <Route exact path="/login" component={Login}/>
           </div>
         </React.Fragment>

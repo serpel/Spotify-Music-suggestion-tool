@@ -18,6 +18,7 @@
   "author": "Sergio Peralta",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "chai": "^4.2.0",
     "cookie-parser": "^1.4.3",
     "cookieparser": "^0.1.0",
