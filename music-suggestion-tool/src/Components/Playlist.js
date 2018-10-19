@@ -76,8 +76,18 @@ class PlaylistComponent extends React.Component {
         this.getRecomendationList();
     }
 
+    onHandlePlay = () => {
+        //this.re
+    }
+
     componentDidMount(){
         //this.getProfile();
+
+        this.spotify.userDevices()
+        .then(result => {
+            console.log(result);
+        });
+
         this.getRecomendationList();      
     }
 
@@ -102,10 +112,10 @@ class PlaylistComponent extends React.Component {
                         <TableRow key={row.id}>
                             <TableCell><img src={row.album.images.pop().url} /></TableCell>
                             <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.artists.join(' & ').toString()}</TableCell>
+                            <TableCell>{row.artists.map(artist => artist.name).join(' & ')}</TableCell>
                             <TableCell component="th" scope="row">{row.album.name}</TableCell>
                             <TableCell>
-                                <Button>
+                                <Button onClick={this.onHandlePlay}>
                                     Play
                                 </Button>
                             </TableCell>

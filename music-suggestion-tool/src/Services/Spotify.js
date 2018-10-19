@@ -12,6 +12,7 @@ const create = (url = 'https://api.spotify.com/v1', token = '') => {
   })
 
   const profile = () => spotify.get(`/me`)
+  const userDevices = () => spotify.get(`/me/player/devices`)
   const resumePlayback = () => spotify.put(`/me/player/play`)
   const nextTrackPlayback = () => spotify.post(`/me/player/next`)
   const previousTrackPlayback = () => spotify.post(`me/player/previous`)
@@ -21,6 +22,7 @@ const create = (url = 'https://api.spotify.com/v1', token = '') => {
 
   return {
     profile,
+    userDevices,
     resumePlayback,
     nextTrackPlayback,
     previousTrackPlayback,
