@@ -105,7 +105,6 @@ class PlaylistComponent extends React.Component {
     getCurrenPlayingSong() {
         this.spotify.currentPlayingSong()
         .then(result => {
-            console.log(result);
             this.setState({
                 currentSongName: result.data.item.name,
                 currentSongArtist: result.data.item.artists.map(artist => artist.name).join(' & ')
@@ -135,12 +134,12 @@ class PlaylistComponent extends React.Component {
         if(this.state.isPlaying){
             this.spotify.pausePlayback(this.state.devices[0].id)
             .then(result => {
-                //console.log(result);
+                console.log("pause click");
             })
         } else {
             this.spotify.playPlayback(this.state.devices[0].id)
             .then(result => {
-                //console.log(result);
+                console.log("play click");
             })
         }
     }
@@ -149,6 +148,9 @@ class PlaylistComponent extends React.Component {
         this.spotify.nextTrackPlayback()
         .then(result => {
             console.log("next click");
+
+            //refresh current playing view
+            this.getCurrenPlayingSong();
         })
     }
 
@@ -156,6 +158,9 @@ class PlaylistComponent extends React.Component {
         this.spotify.previousTrackPlayback()
         .then(result => {
             console.log("back click");
+
+            //refresh current playing view
+            this.getCurrenPlayingSong();
         })
     }
 
@@ -186,7 +191,7 @@ class PlaylistComponent extends React.Component {
                     {this.state.items.map(row => {
                         return (
                         <TableRow key={row.id}>
-                            <TableCell><img src={row.album.images[row.album.images.length - 1].url} /></TableCell>
+                            <TableCell><img src={row.album.images[row.album.images.length - 1].url} alt={row.album.name}/></TableCell>
                             <TableCell>{row.name}</TableCell>
                             <TableCell>{row.artists.map(artist => artist.name).join(' & ')}</TableCell>
                             <TableCell component="th" scope="row">{row.album.name}</TableCell>

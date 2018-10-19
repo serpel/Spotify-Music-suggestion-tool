@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import SpotifyIcon from '../Images/SpotifyIcon.png'
-
-import axios from 'axios';
 import { Redirect } from  'react-router-dom';
 
 const styles = theme => ({
