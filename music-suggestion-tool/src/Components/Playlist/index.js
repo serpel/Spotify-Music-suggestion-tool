@@ -9,12 +9,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SkipNextIcon from '@material-ui/icons/SkipNext';
+import SongControl from './SongControl'
+import SongName from './SongName'
 
 
 import Spotify from '../../Services/Spotify';
@@ -56,48 +52,6 @@ const styles = theme => ({
         width: 38,
       },
 });
-
-
-function SongName(props){
-    const { classes, name, artist } = props;
-
-    return(
-        <Paper className={classes.root} elevation={0}>
-            <Typography component="h5" variant="h5">
-                {name}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-                {artist}
-            </Typography>
-        </Paper>
-    )
-}
-
-function SongControl(props) {
-    const { classes } = props;
-
-    return (
-        <Paper className={classes.root} elevation={0}>
-          <div className={classes.controls}>
-            <IconButton aria-label="Previous" onClick={props.onHandlePrevious}>
-              <SkipPreviousIcon />
-            </IconButton>
-            <IconButton aria-label="Play/pause" onClick={props.onHandlePlay}>
-              <PlayArrowIcon className={classes.playIcon} />
-            </IconButton>
-            <IconButton aria-label="Next" onClick={props.onHandleNext}>
-              <SkipNextIcon />
-            </IconButton>
-          </div>
-        <CardMedia
-          className={classes.cover}
-          image="/static/images/cards/live-from-space.jpg"
-          title="Live from space album cover"
-        />
-      </Paper>
-    );
-  }
-
 
 class PlaylistComponent extends React.Component {
 
