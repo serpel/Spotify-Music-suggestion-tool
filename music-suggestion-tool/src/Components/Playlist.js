@@ -89,9 +89,10 @@ class PlaylistComponent extends React.Component {
                 <Table className={classes.playlist}>
                     <TableHead>
                         <TableRow>
-                            <TableCell numeric>Img</TableCell>
+                            <TableCell>Img</TableCell>
                             <TableCell>Tittle</TableCell>
-                            <TableCell numeric>Album</TableCell>
+                            <TableCell>Artist</TableCell>
+                            <TableCell>Album</TableCell>
                             <TableCell>Options</TableCell>
                         </TableRow>
                     </TableHead>
@@ -99,8 +100,9 @@ class PlaylistComponent extends React.Component {
                     {this.state.items.map(row => {
                         return (
                         <TableRow key={row.id}>
-                            <TableCell></TableCell>
-                            <TableCell numeric>{row.name}</TableCell>
+                            <TableCell><img src={row.album.images.pop().url} /></TableCell>
+                            <TableCell>{row.name}</TableCell>
+                            <TableCell>{row.artists.join(' & ').toString()}</TableCell>
                             <TableCell component="th" scope="row">{row.album.name}</TableCell>
                             <TableCell>
                                 <Button>
