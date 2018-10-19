@@ -15,7 +15,7 @@ const create = (url = 'https://api.spotify.com/v1', token = '') => {
   const resumePlayback = () => spotify.put(`/me/player/play`)
   const nextTrackPlayback = () => spotify.post(`/me/player/next`)
   const previousTrackPlayback = () => spotify.post(`me/player/previous`)
-  const recommendations = () => spotify.get(`/recommendations`)
+  const recommendations = (limit, seed_genres) => spotify.get(`/recommendations`, { limit: limit || 10, seed_genres: seed_genres || 'rock' })
   const createNewPlaylist = (user_id) => spotify.post(`/users/${user_id}/playlists`)
   const addTracksToPlaylist = (playlist_id) => spotify.post(`/playlists/${playlist_id}/tracks`)
 

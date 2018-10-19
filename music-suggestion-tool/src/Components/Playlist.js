@@ -50,7 +50,12 @@ class PlaylistComponent extends React.Component {
     getRecomendationList(){
         this.spotify.recommendations()
         .then(result => {
-            console.log(result.data);
+
+            this.setState({
+                items: result.data.tracks
+            })
+
+            console.log(result.data.tracks);
         })
     }
 
@@ -94,9 +99,10 @@ class PlaylistComponent extends React.Component {
                     {this.state.items.map(row => {
                         return (
                         <TableRow key={row.id}>
-                            <TableCell numeric>{row.Tittle}</TableCell>
-                            <TableCell component="th" scope="row">{row.Album}</TableCell>
-                            <TableCell numeric>
+                            <TableCell></TableCell>
+                            <TableCell numeric>{row.name}</TableCell>
+                            <TableCell component="th" scope="row">{row.album.name}</TableCell>
+                            <TableCell>
                                 <Button>
                                     Play
                                 </Button>
