@@ -13,7 +13,8 @@ const create = (url = 'https://api.spotify.com/v1', token = '') => {
 
   const profile = () => spotify.get(`/me`)
   const userDevices = () => spotify.get(`/me/player/devices`)
-  const resumePlayback = (device_id) => spotify.put(`/me/player/play`, { device_id : device_id})
+  const pausePlayback = (device_id) => spotify.put(`/me/player/pause`, { device_id : device_id || null})
+  const playPlayback = (device_id) => spotify.put(`/me/player/play`, { device_id : device_id || null })
   const nextTrackPlayback = () => spotify.post(`/me/player/next`)
   const previousTrackPlayback = () => spotify.post(`me/player/previous`)
   const recommendations = (limit, seed_genres) => spotify.get(`/recommendations`, { limit: limit || 10, seed_genres: seed_genres || 'rock' })
@@ -23,7 +24,8 @@ const create = (url = 'https://api.spotify.com/v1', token = '') => {
   return {
     profile,
     userDevices,
-    resumePlayback,
+    pausePlayback,
+    playPlayback,
     nextTrackPlayback,
     previousTrackPlayback,
     recommendations,

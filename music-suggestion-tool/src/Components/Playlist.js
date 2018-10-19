@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 
 import Spotify from '../Services/Spotify';
 import queryString from 'query-string'
+import { runInNewContext } from 'vm';
 
 const styles = theme => ({
     root: {
@@ -43,6 +44,7 @@ class PlaylistComponent extends React.Component {
         this.state = {
             items: [],
             devices: [],
+            isPlaying: false,
             alertMessage: false,
             token: token,
         }
@@ -89,11 +91,22 @@ class PlaylistComponent extends React.Component {
     }
 
     onHandlePlay = () => {
-        console.log("dev "+this.state.devices);
-        this.spotify.resumePlayback(this.state.devices[0].id)
-        .then(result => {
-            console.log("result: "+Object.entries(result));
+
+        this.setState({
+            isPlaying : !this.state.isPlaying
         })
+
+        if(this.state.isPlaying){
+            this.spotify.pausePlayback(this.state.devices[0].id)
+            .then(result => {
+                //console.log(result);
+            })
+        } else {
+            this.spotify.playPlayback(this.state.devices[0].id)
+            .then(result => {
+                //console.log(result);
+            })
+        }
     }
 
     componentDidMount(){
@@ -122,7 +135,7 @@ class PlaylistComponent extends React.Component {
                     {this.state.items.map(row => {
                         return (
                         <TableRow key={row.id}>
-                            <TableCell><img src={row.album.images.pop().url} /></TableCell>
+                            <TableCell><img src={row.album.images[row.album.images.length - 1].url} /></TableCell>
                             <TableCell>{row.name}</TableCell>
                             <TableCell>{row.artists.map(artist => artist.name).join(' & ')}</TableCell>
                             <TableCell component="th" scope="row">{row.album.name}</TableCell>
