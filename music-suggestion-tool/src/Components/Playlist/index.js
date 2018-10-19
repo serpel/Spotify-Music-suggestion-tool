@@ -9,8 +9,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -19,9 +17,8 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 
-import Spotify from '../Services/Spotify';
+import Spotify from '../../Services/Spotify';
 import queryString from 'query-string'
-import { runInNewContext } from 'vm';
 
 const styles = theme => ({
     root: {
@@ -62,15 +59,15 @@ const styles = theme => ({
 
 
 function SongName(props){
-    const { classes } = props;
+    const { classes, name, artist } = props;
 
     return(
         <Paper className={classes.root} elevation={0}>
             <Typography component="h5" variant="h5">
-              Live From Space
+                {name}
             </Typography>
             <Typography variant="subtitle1" color="textSecondary">
-              Mac Miller
+                {artist}
             </Typography>
         </Paper>
     )
@@ -85,7 +82,7 @@ function SongControl(props) {
             <IconButton aria-label="Previous">
               <SkipPreviousIcon />
             </IconButton>
-            <IconButton aria-label="Play/pause">
+            <IconButton aria-label="Play/pause" onClick={props.onHandlePlay}>
               <PlayArrowIcon className={classes.playIcon} />
             </IconButton>
             <IconButton aria-label="Next">
@@ -116,8 +113,10 @@ class PlaylistComponent extends React.Component {
         this.state = {
             items: [],
             devices: [],
-            isPlaying: false,
+            isPlaying: true,
             alertMessage: false,
+            currentSongName: '',
+            currentSongArtist: '',
             token: token,
         }
 
@@ -146,6 +145,17 @@ class PlaylistComponent extends React.Component {
             this.setState({
                 items: data
             })*/
+        })
+    }
+
+    getCurrenPlayingSong() {
+        this.spotify.currentPlayingSong()
+        .then(result => {
+            console.log(result);
+            this.setState({
+                currentSongName: result.data.item.name,
+                currentSongArtist: result.data.item.artists.map(artist => artist.name).join(' & ')
+            })
         })
     }
 
@@ -183,6 +193,7 @@ class PlaylistComponent extends React.Component {
 
     componentDidMount(){
         this.getDevices();
+        this.getCurrenPlayingSong();
         this.getRecomendationList();      
     }
 
@@ -223,11 +234,11 @@ class PlaylistComponent extends React.Component {
                     <TableFooter>
                         <TableRow>
                             <TableCell>
-                                <SongName classes={classes} />
+                                <SongName classes={classes} name={this.state.currentSongName} artist={this.state.currentSongArtist} />
                             </TableCell>
                             <TableCell></TableCell>
                             <TableCell>
-                                <SongControl classes={classes} />
+                                <SongControl classes={classes} onHandlePlay={this.onHandlePlay} />
                             </TableCell>
                             <TableCell></TableCell>
                             <TableCell></TableCell>
