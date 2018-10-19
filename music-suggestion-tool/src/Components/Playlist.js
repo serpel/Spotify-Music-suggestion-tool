@@ -16,9 +16,7 @@ const styles = theme => ({
     root: {
         display: 'flex',
         flexWrap: 'wrap',
-        //justifyContent: 'space-around',
         overflow: 'hidden',
-        //backgroundColor: 'powderblue',
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing.unit * 2,
     },
@@ -36,6 +34,7 @@ class PlaylistComponent extends React.Component {
     constructor(props){
         super(props);
 
+        //maybe there is a better way to do this
         const values = queryString.parse(this.props.location.search);
         var token = values.access_token;
 
@@ -49,13 +48,23 @@ class PlaylistComponent extends React.Component {
     }
 
     getRecomendationList(){
-        const result = this.spotify.getMe();
-        console.log(result);
+        this.spotify.recommendations()
+        .then(result => {
+            console.log(result.data);
+        })
     }
 
     getProfile(){
-        const result = this.spotify.getMe();
-        console.log(result);
+        this.spotify.profile()
+        .then(result =>  {
+            console.log(`${Object.entries(result.data)}`);
+        })
+        .then(data => {
+            /*console.log(data);
+            this.setState({
+                items: data
+            })*/
+        })
     }
 
     onHandleGenerateRecomendationList = () => {
@@ -63,7 +72,7 @@ class PlaylistComponent extends React.Component {
     }
 
     componentDidMount(){
-        this.getProfile();
+        //this.getProfile();
         this.getRecomendationList();      
     }
 
