@@ -79,13 +79,13 @@ function SongControl(props) {
     return (
         <Paper className={classes.root} elevation={0}>
           <div className={classes.controls}>
-            <IconButton aria-label="Previous">
+            <IconButton aria-label="Previous" onClick={props.onHandlePrevious}>
               <SkipPreviousIcon />
             </IconButton>
             <IconButton aria-label="Play/pause" onClick={props.onHandlePlay}>
               <PlayArrowIcon className={classes.playIcon} />
             </IconButton>
-            <IconButton aria-label="Next">
+            <IconButton aria-label="Next" onClick={props.onHandleNext}>
               <SkipNextIcon />
             </IconButton>
           </div>
@@ -191,6 +191,20 @@ class PlaylistComponent extends React.Component {
         }
     }
 
+    onHandleNext = () => {
+        this.spotify.nextTrackPlayback()
+        .then(result => {
+            console.log("next click");
+        })
+    }
+
+    onHandlePrevious = () => {
+        this.spotify.previousTrackPlayback()
+        .then(result => {
+            console.log("back click");
+        })
+    }
+
     componentDidMount(){
         this.getDevices();
         this.getCurrenPlayingSong();
@@ -238,7 +252,7 @@ class PlaylistComponent extends React.Component {
                             </TableCell>
                             <TableCell></TableCell>
                             <TableCell>
-                                <SongControl classes={classes} onHandlePlay={this.onHandlePlay} />
+                                <SongControl classes={classes} onHandlePlay={this.onHandlePlay} onHandleNext={this.onHandleNext} onHandlePrevious={this.onHandlePrevious} />
                             </TableCell>
                             <TableCell></TableCell>
                             <TableCell></TableCell>
