@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
-import TableRow from '@material-ui/core/TableHead';
+import TableFooter from '@material-ui/core/TableFooter';
 import TableCell from '@material-ui/core/TableCell';
-import Button from '@material-ui/core/Button'
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+
 
 import Spotify from '../Services/Spotify';
 import queryString from 'query-string'
@@ -40,6 +42,7 @@ class PlaylistComponent extends React.Component {
 
         this.state = {
             items: [],
+            devices: [],
             alertMessage: false,
             token: token,
         }
@@ -72,24 +75,33 @@ class PlaylistComponent extends React.Component {
         })
     }
 
+    getDevices(){
+        this.spotify.userDevices()
+        .then(result => {
+            this.setState({
+                devices : result.data.devices
+            })
+        });
+    }
+
     onHandleGenerateRecomendationList = () => {
         this.getRecomendationList();
     }
 
     onHandlePlay = () => {
-        //this.re
+        console.log("dev "+this.state.devices);
+        this.spotify.resumePlayback(this.state.devices[0].id)
+        .then(result => {
+            console.log("result: "+Object.entries(result));
+        })
     }
 
     componentDidMount(){
-        //this.getProfile();
-
-        this.spotify.userDevices()
-        .then(result => {
-            console.log(result);
-        });
-
+        this.getDevices();
         this.getRecomendationList();      
     }
+
+
 
     render() {
         const { classes } = this.props;
@@ -123,6 +135,16 @@ class PlaylistComponent extends React.Component {
                         );
                     })}
                     </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                        <TableCell>
+                                <Button onClick={this.onHandlePlay}>
+                                    Play
+                                </Button>
+                        </TableCell>
+                        </TableRow>
+                    </TableFooter>
+
                 </Table>
         </Paper>
         );
@@ -131,6 +153,6 @@ class PlaylistComponent extends React.Component {
 
 PlaylistComponent.propTypes = {
     classes: PropTypes.object.isRequired, 
-}
+};
 
 export default withStyles(styles)(PlaylistComponent);
