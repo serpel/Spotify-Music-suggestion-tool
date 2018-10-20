@@ -7,12 +7,19 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button'
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import CategoryList from '@material-ui/icons/FormatListBulleted'
+import CoverList from '@material-ui/icons/ImageAspectRatio'
+import FavIcon from '@material-ui/icons/Favorite'
+import ProductList from '@material-ui/icons/Drafts'
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import StarIcon from '@material-ui/icons/Star';
+import SendIcon from '@material-ui/icons/Send';
 import { Redirect } from 'react-router-dom';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   root: {
@@ -68,16 +75,17 @@ class HomeComponent extends Component {
   render() {
     const { classes } = this.props;
 
+    /*
     if(this.state.loggedIn === false){
       return <Redirect to='/login'/>;
-    }
+    }*/
 
     return (
       <div className={classes.root}>
         <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.flex}>
-              Inplas
+              Spotify Song Recomendations
             </Typography>
             <Button color="inherit" onClick={this.handleLogOutClick}>LogOut</Button>
           </Toolbar>

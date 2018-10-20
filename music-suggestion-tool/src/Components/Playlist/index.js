@@ -180,7 +180,7 @@ class PlaylistComponent extends React.Component {
                 <Table className={classes.playlist}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Img</TableCell>
+                            <TableCell></TableCell>
                             <TableCell>Tittle</TableCell>
                             <TableCell>Artist</TableCell>
                             <TableCell>Album</TableCell>
