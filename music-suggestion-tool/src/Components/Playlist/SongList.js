@@ -44,22 +44,9 @@ function SongList(props){
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                            );
+                        );
                     })}
                 </TableBody>
-                <TableFooter>
-                    <TableRow>
-                        <TableCell>
-                            <SongName classes={classes} name={state.currentSongName} artist={state.currentSongArtist} />
-                        </TableCell>
-                        <TableCell></TableCell>
-                        <TableCell>
-                            <SongControl classes={classes} onHandlePlay={onHandlePlay} onHandleNext={onHandleNext} onHandlePrevious={onHandlePrevious} />
-                        </TableCell>
-                        <TableCell></TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                </TableFooter>
             </Table>
         </Paper>
     );

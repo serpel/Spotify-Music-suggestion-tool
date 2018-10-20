@@ -10,6 +10,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import MoreIcon from '@material-ui/icons/More'
 import SongList from './SongList';
 import SongName from './SongName';
+import SongControl from './SongControl';
 
 function BottomAppBar(props) {
     const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious } = props;
@@ -32,6 +33,7 @@ function BottomAppBar(props) {
             <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
               <AddIcon />
             </Button>
+            <SongControl classes={classes} onHandlePlay={onHandlePlay} onHandleNext={state.onHandleNext} onHandlePrevious={onHandlePrevious} />
             <div>
               <IconButton color="inherit">
                 <SearchIcon />

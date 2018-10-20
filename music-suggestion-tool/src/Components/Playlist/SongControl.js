@@ -10,24 +10,24 @@ function SongControl(props) {
     const { classes } = props;
 
     return (
-        <Paper className={classes.root} elevation={0}>
+        <div>
           <div className={classes.controls}>
-            <IconButton aria-label="Previous" onClick={props.onHandlePrevious}>
-              <SkipPreviousIcon />
-            </IconButton>
-            <IconButton aria-label="Play/pause" onClick={props.onHandlePlay}>
-              <PlayArrowIcon className={classes.playIcon} />
-            </IconButton>
-            <IconButton aria-label="Next" onClick={props.onHandleNext}>
-              <SkipNextIcon />
-            </IconButton>
+              <IconButton aria-label="Previous" onClick={props.onHandlePrevious}>
+                <SkipPreviousIcon />
+              </IconButton>
+              <IconButton aria-label="Play/pause" onClick={props.onHandlePlay}>
+                <PlayArrowIcon className={classes.playIcon} />
+              </IconButton>
+              <IconButton aria-label="Next" onClick={props.onHandleNext}>
+                <SkipNextIcon />
+              </IconButton>
           </div>
-        <CardMedia
-          className={classes.cover}
-          image="/static/images/cards/live-from-space.jpg"
-          title="Live from space album cover"
-        />
-      </Paper>
+          <CardMedia
+            className={classes.cover}
+            image="/static/images/cards/live-from-space.jpg"
+            title="Live from space album cover"
+          />
+       </div>
     );
   }
 

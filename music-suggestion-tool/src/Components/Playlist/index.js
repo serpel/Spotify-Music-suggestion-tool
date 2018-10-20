@@ -1,21 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid'
 import Spotify from '../../Services/Spotify';
 //import SongList from './SongList'
 import BottomAppBar from './BottomAppBar';
 import queryString from 'query-string';
 
 const styles = theme => ({
-    aroot: {
-        flexGrow: 1,
-    },
     root: {
-        flex: 1, 
-        flexDirection: 'row',
-        marginLeft: "auto",
-        marginRight: "auto"
-    },     
+        flexGrow: 1,
+    },  
     container: {
         position: 'relative',
         maxWidth: 1000,
@@ -198,11 +193,15 @@ class PlaylistComponent extends React.Component {
         const { classes } = this.props;
 
         return (
-            <BottomAppBar classes={classes} 
-                        onHandlePlay={this.onHandlePlay} 
-                        onHandleNext={this.onHandleNext}
-                        onHandlePrevious={this.onHandlePrevious}
-                        state={this.state} />
+            <div className={classes.root}>
+                <Grid container direction="row" justify="center" alignItems="center">
+                    <BottomAppBar classes={classes} 
+                                onHandlePlay={this.onHandlePlay} 
+                                onHandleNext={this.onHandleNext}
+                                onHandlePrevious={this.onHandlePrevious}
+                                state={this.state} />
+                </Grid>
+            </div>
         );
     }
 }

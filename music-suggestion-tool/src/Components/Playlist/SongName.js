@@ -8,10 +8,10 @@ function SongName(props){
 
     return(
         <div className={classes.track}>
-            <Typography component="h5" variant="h5">
+            <Typography variant="title">
                 {name}
             </Typography>
-            <Typography variant="subtitle1">
+            <Typography variant="subtitle">
                 {artist}
             </Typography>
         </div>
