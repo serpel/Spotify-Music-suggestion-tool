@@ -1,6 +1,15 @@
-import AppBar from '@material-ui/core/AppBar'
 import React from 'react';
-import SongList from './SongList'
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add'
+import SearchIcon from '@material-ui/icons/Search'
+import MoreIcon from '@material-ui/icons/More'
+import SongList from './SongList';
+import SongName from './SongName';
 
 function BottomAppBar(props) {
     const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious } = props;
@@ -19,6 +28,7 @@ function BottomAppBar(props) {
             <IconButton color="inherit" aria-label="Open drawer">
               <MenuIcon />
             </IconButton>
+            <SongName classes={classes} name={state.currentSongName} artist={state.currentSongArtist} />               
             <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
               <AddIcon />
             </Button>
@@ -40,4 +50,4 @@ function BottomAppBar(props) {
     classes: PropTypes.object.isRequired,
   };
 
-  export default withStyles(styles)(BottomAppBar);
+  export default BottomAppBar;

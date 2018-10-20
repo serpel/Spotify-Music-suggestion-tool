@@ -1,20 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import SongList from './SongList'
 import Spotify from '../../Services/Spotify';
-import queryString from 'query-string'
+//import SongList from './SongList'
+import BottomAppBar from './BottomAppBar';
+import queryString from 'query-string';
 
 const styles = theme => ({
+    aroot: {
+        flexGrow: 1,
+    },
     root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing.unit * 2,
+        flex: 1, 
+        flexDirection: 'row',
+        marginLeft: "auto",
+        marginRight: "auto"
+    },     
+    container: {
+        position: 'relative',
+        maxWidth: 1000,
+    },
+    main: {
+        height: 450,
+        overflowY: 'auto',
+        position: 'relative',
+    },
+    list: {
+        marginBottom: theme.spacing.unit * 2,
+    },
+    toolbar: {
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    fabButton: {
+        position: 'absolute',
+        top: -30,
+        left: 0,
+        right: 0,
+        margin: '0 auto',
+    },
+    track: {
+        color: 'white',
+        textColor: 'white',
     },
     header: {      
     },  
+    subHeader: {
+        backgroundColor: '#fff',
+    },
     playlist: {
     },
     card: {
@@ -165,11 +198,11 @@ class PlaylistComponent extends React.Component {
         const { classes } = this.props;
 
         return (
-            <SongList classes={classes} 
-                      onHandlePlay={this.onHandlePlay} 
-                      onHandleNext={this.onHandleNext}
-                      onHandlePrevious={this.onHandlePrevious}
-                      state={this.state} />
+            <BottomAppBar classes={classes} 
+                        onHandlePlay={this.onHandlePlay} 
+                        onHandleNext={this.onHandleNext}
+                        onHandlePrevious={this.onHandlePrevious}
+                        state={this.state} />
         );
     }
 }
