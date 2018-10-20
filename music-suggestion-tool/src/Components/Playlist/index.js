@@ -91,6 +91,7 @@ class PlaylistComponent extends React.Component {
             alertMessage: false,
             currentSongName: '',
             currentSongArtist: '',
+            currentSongCover: '',
             token: token,
         }
 
@@ -123,11 +124,17 @@ class PlaylistComponent extends React.Component {
     }
 
     getCurrenPlayingSong() {
-        this.spotify.currentPlayingSong()
+        this.spotify.player()
         .then(result => {
+            return result.data;
+        })
+        .then(data => {
+
+            console.log(data);
             this.setState({
-                currentSongName: result.data.item.name,
-                currentSongArtist: result.data.item.artists.map(artist => artist.name).join(' & ')
+                currentSongName: data.item.name,
+                currentSongArtist: data.item.artists.map(artist => artist.name).join(' & '),
+                currentSongCover: data.item.album.images[0].url,
             })
         })
     }

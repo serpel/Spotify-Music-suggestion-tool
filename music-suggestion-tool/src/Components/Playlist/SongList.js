@@ -10,12 +10,12 @@ import Typography from '@material-ui/core/Typography';
 
 function SongList(props){
 
-    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious } = props;
+    const { classes, state, onHandlePlay } = props;
 
     return (
         <Paper square className={classes.main}>
           <Typography className={classes.text} variant="h5" gutterBottom>
-            Song List
+                Song List
           </Typography>
             <Table className={classes.playlist}>
                 <TableHead>

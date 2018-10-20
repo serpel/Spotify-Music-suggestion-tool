@@ -12,6 +12,7 @@ const create = (url = 'https://api.spotify.com/v1', token = '') => {
   })
 
   const profile = () => spotify.get(`/me`)
+  const player =() => spotify.get(`/me/player`)
   const userDevices = () => spotify.get(`/me/player/devices`)
   const pausePlayback = (device_id) => spotify.put(`/me/player/pause`, { device_id : device_id || null})
   const playPlayback = (device_id) => spotify.put(`/me/player/play`, { device_id : device_id || null })
@@ -24,6 +25,7 @@ const create = (url = 'https://api.spotify.com/v1', token = '') => {
 
   return {
     profile,
+    player,
     userDevices,
     pausePlayback,
     playPlayback,

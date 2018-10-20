@@ -1,12 +1,11 @@
 import React from 'react';
-import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 function SongControl(props) {
-    const { classes, cover, title } = props;
+    const { classes } = props;
 
     return (
         <div className={classes.controlblock}>
@@ -21,11 +20,6 @@ function SongControl(props) {
                 <SkipNextIcon />
               </IconButton>
           </div>
-          <CardMedia
-            className={classes.cover}
-            image={cover}
-            title={title}
-          />
        </div>
     );
   }

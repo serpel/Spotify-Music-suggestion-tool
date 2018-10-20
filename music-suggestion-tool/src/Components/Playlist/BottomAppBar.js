@@ -16,7 +16,6 @@ function BottomAppBar(props) {
     const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious } = props;
     return (
       <div className={classes.container}>
-
         <SongList 
             classes={classes} 
             state={state} 
@@ -29,11 +28,18 @@ function BottomAppBar(props) {
             <IconButton color="inherit" aria-label="Open drawer">
               <MenuIcon />
             </IconButton>
-            <SongName classes={classes} name={state.currentSongName} artist={state.currentSongArtist} />               
+            <SongName 
+              classes={classes} 
+              name={state.currentSongName} 
+              artist={state.currentSongArtist} 
+              image={state.currentSongCover} />               
             <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
               <AddIcon />
             </Button>
-            <SongControl classes={classes} onHandlePlay={onHandlePlay} onHandleNext={state.onHandleNext} onHandlePrevious={onHandlePrevious} />
+            <SongControl classes={classes} 
+              onHandlePlay={onHandlePlay} 
+              onHandleNext={state.onHandleNext} 
+              onHandlePrevious={onHandlePrevious} />
             <div>
               <IconButton color="inherit">
                 <SearchIcon />
