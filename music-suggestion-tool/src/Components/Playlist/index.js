@@ -1,18 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Button from '@material-ui/core/Button';
-import SongControl from './SongControl'
-import SongName from './SongName'
-
-
+import SongList from './SongList'
 import Spotify from '../../Services/Spotify';
 import queryString from 'query-string'
 
@@ -176,50 +165,11 @@ class PlaylistComponent extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Paper className={classes.root}>
-                <Table className={classes.playlist}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell>Tittle</TableCell>
-                            <TableCell>Artist</TableCell>
-                            <TableCell>Album</TableCell>
-                            <TableCell>Options</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {this.state.items.map(row => {
-                        return (
-                        <TableRow key={row.id}>
-                            <TableCell><img src={row.album.images[row.album.images.length - 1].url} alt={row.album.name}/></TableCell>
-                            <TableCell>{row.name}</TableCell>
-                            <TableCell>{row.artists.map(artist => artist.name).join(' & ')}</TableCell>
-                            <TableCell component="th" scope="row">{row.album.name}</TableCell>
-                            <TableCell>
-                                <Button onClick={this.onHandlePlay}>
-                                    Play
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                        );
-                    })}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TableCell>
-                                <SongName classes={classes} name={this.state.currentSongName} artist={this.state.currentSongArtist} />
-                            </TableCell>
-                            <TableCell></TableCell>
-                            <TableCell>
-                                <SongControl classes={classes} onHandlePlay={this.onHandlePlay} onHandleNext={this.onHandleNext} onHandlePrevious={this.onHandlePrevious} />
-                            </TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                        </TableRow>
-                    </TableFooter>
-
-                </Table>
-        </Paper>
+            <SongList classes={classes} 
+                      onHandlePlay={this.onHandlePlay} 
+                      onHandleNext={this.onHandleNext}
+                      onHandlePrevious={this.onHandlePrevious}
+                      state={this.state} />
         );
     }
 }

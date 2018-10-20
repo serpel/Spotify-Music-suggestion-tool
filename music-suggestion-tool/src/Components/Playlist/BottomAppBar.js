@@ -1,24 +1,19 @@
+import AppBar from '@material-ui/core/AppBar'
+import React from 'react';
+import SongList from './SongList'
+
 function BottomAppBar(props) {
-    const { classes } = props;
+    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious } = props;
     return (
       <div className={classes.container}>
-        <Paper square className={classes.main}>
-          <Typography className={classes.text} variant="h5" gutterBottom>
-            Inbox
-          </Typography>
-          <List className={classes.list}>
-            {messages.map(({ id, primary, secondary, person }) => (
-              <Fragment key={id}>
-                {id === 1 && <ListSubheader className={classes.subHeader}>Today</ListSubheader>}
-                {id === 3 && <ListSubheader className={classes.subHeader}>Yesterday</ListSubheader>}
-                <ListItem button>
-                  <Avatar alt="Profile Picture" src={person} />
-                  <ListItemText primary={primary} secondary={secondary} />
-                </ListItem>
-              </Fragment>
-            ))}
-          </List>
-        </Paper>
+
+        <SongList 
+            classes={classes} 
+            state={state} 
+            onHandlePlay={onHandlePlay} 
+            onHandleNext={onHandleNext} 
+            onHandlePrevious={onHandlePrevious} />
+       
         <AppBar position="sticky" color="primary">
           <Toolbar className={classes.toolbar}>
             <IconButton color="inherit" aria-label="Open drawer">
@@ -44,5 +39,5 @@ function BottomAppBar(props) {
   BottomAppBar.propTypes = {
     classes: PropTypes.object.isRequired,
   };
-  
+
   export default withStyles(styles)(BottomAppBar);
