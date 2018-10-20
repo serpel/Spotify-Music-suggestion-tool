@@ -6,6 +6,7 @@ import Spotify from '../../Services/Spotify';
 //import SongList from './SongList'
 import BottomAppBar from './BottomAppBar';
 import queryString from 'query-string';
+import 'typeface-roboto';
 
 const styles = theme => ({
     root: {

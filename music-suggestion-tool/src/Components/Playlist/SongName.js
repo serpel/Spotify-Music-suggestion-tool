@@ -1,27 +1,25 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card'
-import CardMedia from '@material-ui/core/CardMedia';
-
 
 function SongName(props){
     const { classes, name, artist, image } = props;
 
+    console.log(image);
     return(
-        <Card className={classes.card}>
+        <div className={classes.card}>
             <div className={classes.track}>
-                <Typography variant="title">
+                <Typography variant="title" color="secundary">
                     {name}
                 </Typography>
-                <Typography variant="subtitle1">
+                <Typography variant="subtitle1" color="secondary">
                     {artist}
                 </Typography>
             </div>
-            <CardMedia
-                src={image}
+            <img
+                image={image}
                 title={name}
             />
-        </Card>
+        </div>
     )
 }
 
