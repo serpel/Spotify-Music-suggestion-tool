@@ -58,6 +58,9 @@ const styles = theme => ({
       cover: {
         width: 200,
       },
+      controlblock: {
+
+      },
       controls: {
         display: 'flex',
         alignItems: 'center',

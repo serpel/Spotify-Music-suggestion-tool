@@ -1,5 +1,4 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
@@ -7,10 +6,10 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 function SongControl(props) {
-    const { classes } = props;
+    const { classes, cover, title } = props;
 
     return (
-        <div>
+        <div className={classes.controlblock}>
           <div className={classes.controls}>
               <IconButton aria-label="Previous" onClick={props.onHandlePrevious}>
                 <SkipPreviousIcon />
@@ -24,8 +23,8 @@ function SongControl(props) {
           </div>
           <CardMedia
             className={classes.cover}
-            image="/static/images/cards/live-from-space.jpg"
-            title="Live from space album cover"
+            image={cover}
+            title={title}
           />
        </div>
     );
