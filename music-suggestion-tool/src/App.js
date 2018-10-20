@@ -3,14 +3,11 @@ import Playlist from './Components/Playlist'
 import Login from './Components/Login'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
 import blue from '@material-ui/core/colors/blue';
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: blue,
-    },
+    primary: blue,
     secondary: {
       main: '#f50057',
     },

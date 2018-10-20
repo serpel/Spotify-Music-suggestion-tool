@@ -91,8 +91,8 @@ class PlaylistComponent extends React.Component {
 
         this.state = {
             items: [],
-            devices: [],
-            isPlaying: true,
+            device: null,
+            is_playing: '',
             alertMessage: false,
             currentSongName: '',
             currentSongArtist: '',
@@ -106,12 +106,12 @@ class PlaylistComponent extends React.Component {
     getRecomendationList(){
         this.spotify.recommendations()
         .then(result => {
-
+            return result.data; 
+        })
+        .then(data =>{
             this.setState({
-                items: result.data.tracks
+                items: data.tracks
             })
-
-            console.log(result.data.tracks);
         })
     }
 
@@ -134,9 +134,8 @@ class PlaylistComponent extends React.Component {
             return result.data;
         })
         .then(data => {
-
-            console.log(data);
             this.setState({
+                is_playing: data.is_playing,
                 currentSongName: data.item.name,
                 currentSongArtist: data.item.artists.map(artist => artist.name).join(' & '),
                 currentSongCover: data.item.album.images[0].url,
@@ -147,10 +146,19 @@ class PlaylistComponent extends React.Component {
     getDevices(){
         this.spotify.userDevices()
         .then(result => {
-            this.setState({
-                devices : result.data.devices
+            // spotify can handle mutiple devices so i need to find the active one in order to play or pause playback
+            var device = result.data.devices.find(function(device){
+                return device.is_active
             })
-        });
+
+            console.log("my device"+ device);
+            return device;
+        })
+        .then( device => {
+            this.setState({
+                device : device
+            })
+        })
     }
 
     onHandleGenerateRecomendationList = () => {
@@ -159,19 +167,24 @@ class PlaylistComponent extends React.Component {
 
     onHandlePlay = () => {
 
+        /*
         this.setState({
-            isPlaying : !this.state.isPlaying
-        })
+            is_playing : !this.state.is_playing
+        })*/
+        console.log("este es"+this.state.device.id);
+        console.log("current playing "+this.state.is_playing);
 
-        if(this.state.isPlaying){
-            this.spotify.pausePlayback(this.state.devices[0].id)
+        if(this.state.is_playing === true){
+            this.spotify.pausePlayback()
             .then(result => {
                 console.log("pause click");
+                this.getCurrenPlayingSong();
             })
         } else {
-            this.spotify.playPlayback(this.state.devices[0].id)
+            this.spotify.playPlayback()
             .then(result => {
                 console.log("play click");
+                this.getCurrenPlayingSong();
             })
         }
     }

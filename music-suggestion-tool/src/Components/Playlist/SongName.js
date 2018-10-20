@@ -1,24 +1,26 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import IconBotton from '@material-ui/core/IconButton';
 
 function SongName(props){
     const { classes, name, artist, image } = props;
-
-    console.log(image);
+    
     return(
         <div className={classes.card}>
             <div className={classes.track}>
-                <Typography variant="title" color="secundary">
+                <Typography variant="title">
                     {name}
                 </Typography>
-                <Typography variant="subtitle1" color="secondary">
+                <Typography variant="body1" >
                     {artist}
                 </Typography>
             </div>
+            <IconBotton>
             <img
                 image={image}
-                title={name}
+                alt={name}
             />
+            </IconBotton>
         </div>
     )
 }
