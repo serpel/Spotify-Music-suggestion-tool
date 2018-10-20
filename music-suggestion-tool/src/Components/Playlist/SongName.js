@@ -7,8 +7,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 function SongName(props){
     const { classes, name, artist, image } = props;
 
-    console.log(image);
-
     return(
         <Card className={classes.card}>
             <div className={classes.track}>
@@ -20,7 +18,7 @@ function SongName(props){
                 </Typography>
             </div>
             <CardMedia
-                image={image}
+                src={image}
                 title={name}
             />
         </Card>

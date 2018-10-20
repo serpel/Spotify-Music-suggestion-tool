@@ -24,13 +24,17 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 2,
     },
     toolbar: {
-        alignItems: 'center',
+        //alignItems: 'center',
         justifyContent: 'space-between',
+    },
+    toolbaroptions: {
+       alignItems: 'center',
+       justifyContent: 'space-between',
     },
     fabButton: {
         position: 'absolute',
         top: -30,
-        left: 0,
+        left: 700,
         right: 0,
         margin: '0 auto',
     },

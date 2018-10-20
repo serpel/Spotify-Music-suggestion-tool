@@ -24,30 +24,25 @@ function BottomAppBar(props) {
             onHandlePrevious={onHandlePrevious} />
        
         <AppBar position="sticky" color="primary">
-          <Toolbar className={classes.toolbar}>
-            <IconButton color="inherit" aria-label="Open drawer">
-              <MenuIcon />
+          <Toolbar>
+            <IconButton color="inherit">
+                <MoreIcon />
             </IconButton>
             <SongName 
               classes={classes} 
               name={state.currentSongName} 
               artist={state.currentSongArtist} 
-              image={state.currentSongCover} />               
+              image={state.currentSongCover} />             
+
             <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
               <AddIcon />
             </Button>
+
             <SongControl classes={classes} 
               onHandlePlay={onHandlePlay} 
               onHandleNext={state.onHandleNext} 
               onHandlePrevious={onHandlePrevious} />
-            <div>
-              <IconButton color="inherit">
-                <SearchIcon />
-              </IconButton>
-              <IconButton color="inherit">
-                <MoreIcon />
-              </IconButton>
-            </div>
+             
           </Toolbar>
         </AppBar>
       </div>
