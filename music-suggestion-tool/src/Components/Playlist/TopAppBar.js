@@ -12,20 +12,20 @@ function TopAppBar(props) {
     const { classes, profileImg, profileName } = props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
+        <AppBar position="static" >
+          <Toolbar className={classes.toolbar}>
             <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              Spotify Songs Recommendations
-            </Typography>
             <Avatar
                 alt={profileName}
                 src={profileImg}
                 className={classes.avatar}
             />
-            <Button color="inherit">Logout</Button>
+            <Typography variant="h6" color="inherit" className={classes.grow}>
+                Welcome: {profileName}
+            </Typography>          
+            <Button color="inherit" className={classes.logout}>Logout</Button>
           </Toolbar>
         </AppBar>
       </div>

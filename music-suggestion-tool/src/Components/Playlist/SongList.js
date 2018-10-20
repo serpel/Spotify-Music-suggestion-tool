@@ -19,6 +19,7 @@ function SongList(props){
             width="100"
             src="https://www.designformusic.com/wp-content/uploads/2015/10/insurgency-digital-album-cover-design.jpg" 
             alt="example" />
+         
           
           <Typography className={classes.text} variant="h5" gutterBottom>
                 Song List

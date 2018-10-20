@@ -26,17 +26,19 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit * 2,
     },
     toolbar: {
-        //alignItems: 'center',
-        justifyContent: 'space-between',
+        alignContent: 'space-between',
+        alignItems: 'center',
     },
-    toolbaroptions: {
-       alignItems: 'center',
-       justifyContent: 'space-between',
+    avatar: {
+        margin: 10,
+    },
+    logout: {
+        left: '45%'
     },
     fabButton: {
         position: 'absolute',
         top: -30,
-        left: 700,
+        left: '50%',
         right: 0,
         margin: '0 auto',
     },
