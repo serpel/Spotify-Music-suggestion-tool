@@ -37,10 +37,10 @@ function BottomAppBar(props) {
             </Button>
 
             <SongControl classes={classes} 
+              is_playing={state.is_playing}
               onHandlePlay={onHandlePlay} 
               onHandleNext={state.onHandleNext} 
-              onHandlePrevious={onHandlePrevious} />
-             
+              onHandlePrevious={onHandlePrevious} />        
           </Toolbar>
         </AppBar>
       </div>

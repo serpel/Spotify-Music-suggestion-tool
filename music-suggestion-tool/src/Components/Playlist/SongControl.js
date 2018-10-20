@@ -6,19 +6,19 @@ import PauseArrowIcon from '@material-ui/icons/Pause';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 function SongControl(props) {
-    const { classes, is_playing } = props;
+    const { classes, is_playing, onHandlePrevious, onHandleNext, onHandlePlay } = props;
 
     return (
         <div className={classes.controlblock}>
           <div className={classes.controls}>
-              <IconButton aria-label="Previous" onClick={props.onHandlePrevious}>
+              <IconButton aria-label="Previous" onClick={onHandlePrevious}>
                 <SkipPreviousIcon />
               </IconButton>
-              <IconButton aria-label="Play/pause" onClick={props.onHandlePlay}>
-                 { is_playing === true && <PlayArrowIcon className={classes.playIcon} />}
-                 { is_playing === false && <PauseArrowIcon className={classes.playIcon} />}
+              <IconButton aria-label="Play/pause" onClick={onHandlePlay}>
+                 { is_playing === false && <PlayArrowIcon className={classes.playIcon} />}
+                 { is_playing === true && <PauseArrowIcon className={classes.playIcon} />}
               </IconButton>
-              <IconButton aria-label="Next" onClick={props.onHandleNext}>
+              <IconButton aria-label="Next" onClick={onHandleNext}>
                 <SkipNextIcon />
               </IconButton>
           </div>

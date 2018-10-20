@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
 import Spotify from '../../Services/Spotify';
 //import SongList from './SongList'
+import TopAppBar from './TopAppBar';
 import BottomAppBar from './BottomAppBar';
 import queryString from 'query-string';
 import 'typeface-roboto';
@@ -97,6 +98,8 @@ class PlaylistComponent extends React.Component {
             currentSongName: '',
             currentSongArtist: '',
             currentSongCover: '',
+            profileImg: '',
+            profileName: '',
             token: token,
         }
 
@@ -118,13 +121,13 @@ class PlaylistComponent extends React.Component {
     getProfile(){
         this.spotify.profile()
         .then(result =>  {
-            console.log(`${Object.entries(result.data)}`);
+            return result.data;
         })
         .then(data => {
-            /*console.log(data);
             this.setState({
-                items: data
-            })*/
+                profileName: data.display_name,
+                profileImg: data.images[data.images.length -1].url,
+            })
         })
     }
 
@@ -203,6 +206,7 @@ class PlaylistComponent extends React.Component {
     }
 
     componentDidMount(){
+        this.getProfile();
         this.getDevices();
         this.getCurrenPlayingSong();
         this.getRecomendationList();      
@@ -216,6 +220,10 @@ class PlaylistComponent extends React.Component {
         return (
             <div className={classes.root}>
                 <Grid container direction="row" justify="center" alignItems="center">
+                    <TopAppBar classes={classes}
+                               onHandleLogout={this.onHandleLogout}
+                               profileImg={this.state.profileImg}
+                               profileName={this.state.profileName} />
                     <BottomAppBar classes={classes} 
                                 onHandlePlay={this.onHandlePlay} 
                                 onHandleNext={this.onHandleNext}
