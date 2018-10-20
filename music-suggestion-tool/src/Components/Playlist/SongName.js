@@ -4,7 +4,7 @@ import IconBotton from '@material-ui/core/IconButton';
 
 function SongName(props){
     const { classes, name, artist, image } = props;
-    
+
     return(
         <div className={classes.card}>
             <div className={classes.track}>
@@ -16,10 +16,10 @@ function SongName(props){
                 </Typography>
             </div>
             <IconBotton>
-            <img
-                image={image}
-                alt={name}
-            />
+                <img
+                    image={image}
+                    alt={name}
+                />
             </IconBotton>
         </div>
     )

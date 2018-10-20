@@ -138,7 +138,7 @@ class PlaylistComponent extends React.Component {
                 is_playing: data.is_playing,
                 currentSongName: data.item.name,
                 currentSongArtist: data.item.artists.map(artist => artist.name).join(' & '),
-                currentSongCover: data.item.album.images[0].url,
+                currentSongCover: data.item.album.images[data.item.album.images.length -1].url,
             })
         })
     }
@@ -151,7 +151,6 @@ class PlaylistComponent extends React.Component {
                 return device.is_active
             })
 
-            console.log("my device"+ device);
             return device;
         })
         .then( device => {
@@ -161,30 +160,26 @@ class PlaylistComponent extends React.Component {
         })
     }
 
-    onHandleGenerateRecomendationList = () => {
+    onHandleNewRecomendationList = () => {
         this.getRecomendationList();
     }
 
     onHandlePlay = () => {
-
-        /*
-        this.setState({
-            is_playing : !this.state.is_playing
-        })*/
-        console.log("este es"+this.state.device.id);
-        console.log("current playing "+this.state.is_playing);
-
         if(this.state.is_playing === true){
             this.spotify.pausePlayback()
             .then(result => {
                 console.log("pause click");
-                this.getCurrenPlayingSong();
+                this.setState({
+                    is_playing : !this.state.is_playing
+                })
             })
         } else {
             this.spotify.playPlayback()
             .then(result => {
                 console.log("play click");
-                this.getCurrenPlayingSong();
+                this.setState({
+                    is_playing : !this.state.is_playing
+                })
             })
         }
     }
@@ -193,7 +188,6 @@ class PlaylistComponent extends React.Component {
         this.spotify.nextTrackPlayback()
         .then(result => {
             console.log("next click");
-
             //refresh current playing view
             this.getCurrenPlayingSong();
         })
@@ -203,7 +197,6 @@ class PlaylistComponent extends React.Component {
         this.spotify.previousTrackPlayback()
         .then(result => {
             console.log("back click");
-
             //refresh current playing view
             this.getCurrenPlayingSong();
         })
@@ -227,6 +220,7 @@ class PlaylistComponent extends React.Component {
                                 onHandlePlay={this.onHandlePlay} 
                                 onHandleNext={this.onHandleNext}
                                 onHandlePrevious={this.onHandlePrevious}
+                                onHandleNewRecomendationList={this.onHandleNewRecomendationList}
                                 state={this.state} />
                 </Grid>
             </div>

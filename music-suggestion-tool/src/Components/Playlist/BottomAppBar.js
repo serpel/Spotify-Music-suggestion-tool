@@ -4,14 +4,14 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add'
+import NewIcon from '@material-ui/icons/Cached'
 import MoreIcon from '@material-ui/icons/MoreVert'
 import SongList from './SongList';
 import SongName from './SongName';
 import SongControl from './SongControl';
 
 function BottomAppBar(props) {
-    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious } = props;
+    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, onHandleNewRecomendationList } = props;
     return (
       <div className={classes.container}>
         <SongList 
@@ -32,8 +32,8 @@ function BottomAppBar(props) {
               artist={state.currentSongArtist} 
               image={state.currentSongCover} />             
 
-            <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton}>
-              <AddIcon />
+            <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton} onClick={onHandleNewRecomendationList}>
+              <NewIcon />
             </Button>
 
             <SongControl classes={classes} 
