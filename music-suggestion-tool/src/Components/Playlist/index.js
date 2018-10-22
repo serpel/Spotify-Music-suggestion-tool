@@ -255,18 +255,8 @@ class PlaylistComponent extends React.Component {
         this.setState({ genre: event.target.value });
     };
 
-    //handle expandable panel change
-    handleExpandableChange = event => {
-        console.log("asdasd");
-        this.setState({
-            settingExpanded: true,
-        });
-      };
-
-    handleExpandedSettings = () => {
-        this.setState({
-            settingExpanded: !this.state.settingExpanded
-        })
+    handleAddPlaylist = () => {
+        alert('open popup');
     }
 
     componentDidMount(){
@@ -295,8 +285,7 @@ class PlaylistComponent extends React.Component {
                                 onHandlePrevious={this.onHandlePrevious}
                                 onHandleNewRecomendationList={this.onHandleNewRecomendationList}
                                 handleChange={this.handleChange}
-                                handleExpandedSettings={this.handleExpandedSettings}
-                                handleExpandableChange={this.handleExpandableChange}
+                                handleAddPlaylist={this.handleAddPlaylist}
                                 state={this.state} />
                 </Grid>
             </div>

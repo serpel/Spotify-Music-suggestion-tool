@@ -7,13 +7,14 @@ import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CheckIcon from '@material-ui/icons/Check';
 import NewIcon from '@material-ui/icons/Cached';
-import MoreIcon from '@material-ui/icons/MoreVert';
+//import MoreIcon from '@material-ui/icons/MoreVert';
+import AddPlaylistIcon from '@material-ui/icons/PlaylistAdd'
 import SongList from './SongList';
 import SongName from './SongName';
 import SongControl from './SongControl';
 
 function BottomAppBar(props) {
-    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, handleChange, handleExpandedSettings, onHandleNewRecomendationList, handleExpandableChange } = props;
+    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, handleChange, onHandleNewRecomendationList, handleAddPlaylist } = props;
     return (
       <div className={classes.container}>
         <SongList 
@@ -22,14 +23,12 @@ function BottomAppBar(props) {
             onHandlePlay={onHandlePlay} 
             onHandleNext={onHandleNext} 
             onHandlePrevious={onHandlePrevious}
-            handleChange={handleChange}
-            handleExpandedSettings={handleExpandedSettings}
-            handleExpandableChange={handleExpandableChange} />
+            handleChange={handleChange} />
        
         <AppBar position="sticky" color="primary">
           <Toolbar>
-            <IconButton color="inherit">
-                <MoreIcon />
+            <IconButton color="inherit" onClick={handleAddPlaylist}>
+                <AddPlaylistIcon />
             </IconButton>
             <SongName 
               classes={classes} 
