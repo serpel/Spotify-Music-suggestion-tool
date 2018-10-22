@@ -21,7 +21,6 @@ function AddPlaylistDialog(props){
                 onClose={handleClosePlaylist}
                 aria-labelledby="form-dialog-title">
                   <DialogTitle id="form-dialog-title">Add New Playlist</DialogTitle>
-                    <form onSubmit={onHandleAddPlaylistSubmit}>
                       <DialogContent> 
                         <DialogContentText>
                             Please Add a Playlist Name
@@ -32,9 +31,8 @@ function AddPlaylistDialog(props){
                       <Divider />
                       <DialogActions>
                         <Button onClick={handleClosePlaylist} color="primary">Cancel</Button>
-                        <Button type="submit" color="primary">Save</Button>
+                        <Button type="submit" color="primary" onClick={onHandleAddPlaylistSubmit}>Save</Button>
                       </DialogActions>
-                    </form>
               </Dialog>
     );
 }

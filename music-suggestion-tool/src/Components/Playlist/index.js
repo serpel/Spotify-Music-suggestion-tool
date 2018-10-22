@@ -118,16 +118,19 @@ class PlaylistComponent extends React.Component {
             currentSongName: '',
             currentSongArtist: '',
             currentSongCover: '',
+            userId: '',
             profileImg: '',
             profileName: '',
             addPlaylistDialog: false,
             loadingAddPlaylist: false,
             playlistName: '',
             settingExpanded: false,
-            token: token,
+            token: token === (null || '' ) ? this.state.token : token,
         }
 
-        this.spotify = Spotify.create(process.env.REACT_APP_SPOTIFY_API, token)
+        //console.log('hey ')
+
+        this.spotify = Spotify.create(process.env.REACT_APP_SPOTIFY_API, this.state.token)
     }
 
     getRecomendationList(){
@@ -170,10 +173,12 @@ class PlaylistComponent extends React.Component {
     getProfile(){
         this.spotify.profile()
         .then(result =>  {
+            console.log(result.data);
             return result.data;
         })
         .then(data => {
             this.setState({
+                userId: data.id,
                 profileName: data.display_name,
                 profileImg: data.images[data.images.length -1].url,
             })
@@ -282,17 +287,14 @@ class PlaylistComponent extends React.Component {
                 loadingAddPlaylist: true,
             })
 
-            this.spotify.createNewPlaylist()
+            this.spotify.createNewPlaylist(this.state.userId, this.state.playlistName)
             .then(result => {
-                return result.data;
-            })
-            .then(data => {
-
+                console.log('entro en crear una lista');
                 this.setState({
                     loadingAddPlaylist: false,
                 })
             })
-        } 
+        }
     }
 
     componentDidMount(){
@@ -308,13 +310,18 @@ class PlaylistComponent extends React.Component {
     render() {
         const { classes } = this.props;
 
+        if(this.state.token === (null || '')){
+            return null;
+        }
+
         return (
             <div className={classes.root}>
                 <Grid container direction="row" justify="center" alignItems="center">
                     <TopAppBar classes={classes}
                                onHandleLogout={this.onHandleLogout}
                                profileImg={this.state.profileImg}
-                               profileName={this.state.profileName} />
+                               profileName={this.state.profileName} 
+                               {...this.props} />
                     <BottomAppBar classes={classes} 
                                 onHandlePlay={this.onHandlePlay} 
                                 onHandleNext={this.onHandleNext}
@@ -322,7 +329,8 @@ class PlaylistComponent extends React.Component {
                                 onHandleNewRecomendationList={this.onHandleNewRecomendationList}
                                 handleChange={this.handleChange}  
                                 handleAddPlaylist={this.handleAddPlaylist}       
-                                state={this.state} />
+                                state={this.state}
+                                {...this.props} />
                 </Grid>
 
                 <AddPlaylistDialog 
