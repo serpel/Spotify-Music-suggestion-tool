@@ -4,14 +4,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
-import NewIcon from '@material-ui/icons/Cached'
-import MoreIcon from '@material-ui/icons/MoreVert'
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CheckIcon from '@material-ui/icons/Check';
+import NewIcon from '@material-ui/icons/Cached';
+import MoreIcon from '@material-ui/icons/MoreVert';
 import SongList from './SongList';
 import SongName from './SongName';
 import SongControl from './SongControl';
 
 function BottomAppBar(props) {
-    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, handleChange, onHandleNewRecomendationList } = props;
+    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, handleChange, handleExpandedSettings, onHandleNewRecomendationList, handleExpandableChange } = props;
     return (
       <div className={classes.container}>
         <SongList 
@@ -20,7 +22,9 @@ function BottomAppBar(props) {
             onHandlePlay={onHandlePlay} 
             onHandleNext={onHandleNext} 
             onHandlePrevious={onHandlePrevious}
-            handleChange={handleChange} />
+            handleChange={handleChange}
+            handleExpandedSettings={handleExpandedSettings}
+            handleExpandableChange={handleExpandableChange} />
        
         <AppBar position="sticky" color="primary">
           <Toolbar>
@@ -33,9 +37,17 @@ function BottomAppBar(props) {
               artist={state.currentSongArtist} 
               image={state.currentSongCover} />             
 
-            <Button variant="fab" color="secondary" aria-label="Add" className={classes.fabButton} onClick={onHandleNewRecomendationList}>
-              <NewIcon />
-            </Button>
+            <div className={classes.wrapper}>
+              <Button 
+                  variant="fab" 
+                  color="secondary" 
+                  aria-label="Add" 
+                  className={classes.fabButton} 
+                  onClick={onHandleNewRecomendationList}>
+                  { state.loading === true ? <NewIcon /> : <CheckIcon />}
+              </Button>
+              {state.loading && <CircularProgress size={64} className={classes.fabProgress} />}
+            </div>
 
             <SongControl classes={classes} 
               is_playing={state.is_playing}

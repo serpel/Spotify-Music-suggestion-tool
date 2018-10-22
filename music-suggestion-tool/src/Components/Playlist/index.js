@@ -8,6 +8,7 @@ import TopAppBar from './TopAppBar';
 import BottomAppBar from './BottomAppBar';
 import queryString from 'query-string';
 import 'typeface-roboto';
+import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
     root: {
@@ -41,6 +42,15 @@ const styles = theme => ({
         left: '50%',
         right: 0,
         margin: '0 auto',
+    },
+    fabProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: -30,
+        left: '50%',
+        right: 0,
+        margin: '0 auto',
+        zIndex: 1,
     },
     track: {
         color: 'white',
@@ -79,6 +89,10 @@ const styles = theme => ({
         height: 38,
         width: 38,
       },
+      wrapper: {
+        //margin: theme.spacing.unit,
+        //position: 'relative',
+      },
 });
 
 class PlaylistComponent extends React.Component {
@@ -97,6 +111,7 @@ class PlaylistComponent extends React.Component {
             genres: [],
             genre: [],
             device: null,
+            loading: false,
             is_playing: '',
             alertMessage: false,
             currentSongName: '',
@@ -112,15 +127,28 @@ class PlaylistComponent extends React.Component {
     }
 
     getRecomendationList(){
-        this.spotify.recommendations()
-        .then(result => {
-            return result.data; 
-        })
-        .then(data =>{
+
+        //i need to check loading state for reduce callbacks 
+        if (!this.state.loading) {
+
+            console.log('cargando');
             this.setState({
-                items: data.tracks
+                loading: true,
             })
-        })
+
+            this.spotify.recommendations()
+            .then(result => {
+                return result.data; 
+            })
+            .then(data =>{
+
+                console.log('ready');
+                this.setState({
+                    items: data.tracks,
+                    loading: false
+                })
+            })
+        }
     }
 
     getGenres(){
