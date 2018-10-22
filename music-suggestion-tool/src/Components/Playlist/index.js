@@ -6,6 +6,7 @@ import Spotify from '../../Services/Spotify';
 //import SongList from './SongList'
 import TopAppBar from './TopAppBar';
 import BottomAppBar from './BottomAppBar';
+import AddPlaylistDialog from './AddPlaylistDialog';
 import queryString from 'query-string';
 import 'typeface-roboto';
 import green from '@material-ui/core/colors/green';
@@ -119,6 +120,9 @@ class PlaylistComponent extends React.Component {
             currentSongCover: '',
             profileImg: '',
             profileName: '',
+            addPlaylistDialog: false,
+            loadingAddPlaylist: false,
+            playlistName: '',
             settingExpanded: false,
             token: token,
         }
@@ -255,8 +259,40 @@ class PlaylistComponent extends React.Component {
         this.setState({ genre: event.target.value });
     };
 
+    handleAttributeChange = name => event => {
+        this.setState({ [name]: event.target.value });
+    };
+
     handleAddPlaylist = () => {
-        alert('open popup');
+        this.setState({
+            addPlaylistDialog: true,
+        })
+    }
+
+    handleClosePlaylist = () => {
+        this.setState({
+            addPlaylistDialog: false,
+        })
+    } 
+    
+    onHandleAddPlaylistSubmit = () => {
+
+        if(!this.state.loadingAddPlaylist){
+            this.setState({
+                loadingAddPlaylist: true,
+            })
+
+            this.spotify.createNewPlaylist()
+            .then(result => {
+                return result.data;
+            })
+            .then(data => {
+
+                this.setState({
+                    loadingAddPlaylist: false,
+                })
+            })
+        } 
     }
 
     componentDidMount(){
@@ -284,10 +320,18 @@ class PlaylistComponent extends React.Component {
                                 onHandleNext={this.onHandleNext}
                                 onHandlePrevious={this.onHandlePrevious}
                                 onHandleNewRecomendationList={this.onHandleNewRecomendationList}
-                                handleChange={this.handleChange}
-                                handleAddPlaylist={this.handleAddPlaylist}
+                                handleChange={this.handleChange}  
+                                handleAddPlaylist={this.handleAddPlaylist}       
                                 state={this.state} />
                 </Grid>
+
+                <AddPlaylistDialog 
+                    state={this.state}  
+                    handleAddPlaylist={this.handleAddPlaylist}
+                    handleClosePlaylist={this.handleClosePlaylist}
+                    onHandleAddPlaylistSubmit={this.onHandleAddPlaylistSubmit}
+                    handleAttributeChange={this.handleAttributeChange}
+                    {...this.props} />
             </div>
         );
     }

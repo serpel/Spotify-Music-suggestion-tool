@@ -57,7 +57,7 @@ const styles = theme => ({
 
 function CustomSearch(props){
 
-    const { classes, genres, genre, expanded, handleChange, handleExpandedSettings, handleExpandableChange } = props;
+    const { classes, genres, genre, handleChange, } = props;
 
     return (
         <div className={classes.searchRoot}>
