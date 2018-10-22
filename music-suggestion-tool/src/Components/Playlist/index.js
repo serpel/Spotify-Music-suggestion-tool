@@ -94,6 +94,8 @@ class PlaylistComponent extends React.Component {
 
         this.state = {
             items: [],
+            genres: [],
+            genre: [],
             device: null,
             is_playing: '',
             alertMessage: false,
@@ -102,6 +104,7 @@ class PlaylistComponent extends React.Component {
             currentSongCover: '',
             profileImg: '',
             profileName: '',
+            settingExpanded: false,
             token: token,
         }
 
@@ -116,6 +119,18 @@ class PlaylistComponent extends React.Component {
         .then(data =>{
             this.setState({
                 items: data.tracks
+            })
+        })
+    }
+
+    getGenres(){
+        this.spotify.recommendationGenreSeeds()
+        .then(result => {
+            return result.data;
+        })
+        .then(data => {
+            this.setState({
+                genres: data.genres,
             })
         })
     }
@@ -207,9 +222,29 @@ class PlaylistComponent extends React.Component {
         })
     }
 
+    //handle change genre settings block
+    handleChange = event => {
+        this.setState({ genre: event.target.value });
+    };
+
+    //handle expandable panel change
+    handleExpandableChange = event => {
+        console.log("asdasd");
+        this.setState({
+            settingExpanded: true,
+        });
+      };
+
+    handleExpandedSettings = () => {
+        this.setState({
+            settingExpanded: !this.state.settingExpanded
+        })
+    }
+
     componentDidMount(){
         this.getProfile();
         this.getDevices();
+        this.getGenres();
         this.getCurrenPlayingSong();
         this.getRecomendationList();      
     }
@@ -231,6 +266,9 @@ class PlaylistComponent extends React.Component {
                                 onHandleNext={this.onHandleNext}
                                 onHandlePrevious={this.onHandlePrevious}
                                 onHandleNewRecomendationList={this.onHandleNewRecomendationList}
+                                handleChange={this.handleChange}
+                                handleExpandedSettings={this.handleExpandedSettings}
+                                handleExpandableChange={this.handleExpandableChange}
                                 state={this.state} />
                 </Grid>
             </div>

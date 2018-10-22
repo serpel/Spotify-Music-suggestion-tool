@@ -11,7 +11,7 @@ import SongName from './SongName';
 import SongControl from './SongControl';
 
 function BottomAppBar(props) {
-    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, onHandleNewRecomendationList } = props;
+    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, handleChange, onHandleNewRecomendationList } = props;
     return (
       <div className={classes.container}>
         <SongList 
@@ -19,7 +19,8 @@ function BottomAppBar(props) {
             state={state} 
             onHandlePlay={onHandlePlay} 
             onHandleNext={onHandleNext} 
-            onHandlePrevious={onHandlePrevious} />
+            onHandlePrevious={onHandlePrevious}
+            handleChange={handleChange} />
        
         <AppBar position="sticky" color="primary">
           <Toolbar>

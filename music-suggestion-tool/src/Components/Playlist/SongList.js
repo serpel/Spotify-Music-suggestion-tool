@@ -1,4 +1,5 @@
 import React from 'react';
+//import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -6,25 +7,22 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+
+import CustomSearch from './CustomSearch'
 
 function SongList(props){
 
-    const { classes, state, onHandlePlay } = props;
+    const { classes, state, onHandlePlay, handleChange } = props;
 
     return (
         <Paper square className={classes.main}>
 
-          <img 
-            width="100"
-            src="https://www.designformusic.com/wp-content/uploads/2015/10/insurgency-digital-album-cover-design.jpg" 
-            alt="example" />
-         
-          
-          <Typography className={classes.text} variant="h5" gutterBottom>
-                Song List
-          </Typography>
-            <Table className={classes.playlist}>
+         <CustomSearch 
+            genres={state.genres} 
+            genre={state.genre} 
+            handleChange={handleChange} />
+
+          <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell></TableCell>
