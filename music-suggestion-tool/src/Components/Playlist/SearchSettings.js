@@ -90,10 +90,10 @@ function CustomSearch(props){
                             )}
                             >
                             {genres.map(name => (
-                            <MenuItem
-                                key={name}
-                                value={name}
-                            >
+                                <MenuItem
+                                    key={name}
+                                    value={name}
+                                >
                                 {name}
                             </MenuItem>
                             ))}

@@ -142,14 +142,16 @@ class PlaylistComponent extends React.Component {
                 loading: true,
             })
 
+            //default values;
             let genre = '';
+            let limit = 15;
 
             if(this.state.genre.length > 0)
             {
                 genre = this.state.genre.join(',');
             }
 
-            this.spotify.recommendations()
+            this.spotify.recommendations(limit, genre)
             .then(result => {
                 return result.data; 
             })

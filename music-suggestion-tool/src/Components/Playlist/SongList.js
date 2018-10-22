@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 
-import CustomSearch from './CustomSearch'
+import SearchSettings from './SearchSettings'
 
 function SongList(props){
 
@@ -17,7 +17,7 @@ function SongList(props){
     return (
         <Paper square className={classes.main}>
 
-         <CustomSearch 
+         <SearchSettings 
             genres={state.genres} 
             genre={state.genre} 
             handleChange={handleChange} />
