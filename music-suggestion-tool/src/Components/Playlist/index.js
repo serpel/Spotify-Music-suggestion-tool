@@ -138,18 +138,22 @@ class PlaylistComponent extends React.Component {
         //i need to check loading state for reduce callbacks 
         if (!this.state.loading) {
 
-            console.log('cargando');
             this.setState({
                 loading: true,
             })
+
+            let genre = '';
+
+            if(this.state.genre.length > 0)
+            {
+                genre = this.state.genre.join(',');
+            }
 
             this.spotify.recommendations()
             .then(result => {
                 return result.data; 
             })
             .then(data =>{
-
-                console.log('ready');
                 this.setState({
                     items: data.tracks,
                     loading: false
@@ -173,7 +177,7 @@ class PlaylistComponent extends React.Component {
     getProfile(){
         this.spotify.profile()
         .then(result =>  {
-            console.log(result.data);
+            //console.log(result.data);
             return result.data;
         })
         .then(data => {
@@ -287,11 +291,28 @@ class PlaylistComponent extends React.Component {
                 loadingAddPlaylist: true,
             })
 
-            this.spotify.createNewPlaylist(this.state.userId, this.state.playlistName)
+            this.spotify.createNewPlaylist(this.state.userId, this.state.playlistName, '', true)
             .then(result => {
-                console.log('entro en crear una lista');
+                return result.data;
+            })
+            .then(data => {
+                //adding tracks to playlist
+                if(data.id){
+                    //my recommended list
+                    var uris = this.state.items.map(track => track.uri).join(',');
+                    //console.log(uris);
+                    this.spotify.addTracksToPlaylist(data.id, uris)
+                    .then(result => {
+                        return result.data;
+                    })
+                    .then(data => {
+                        console.log("add playlist success");
+                    })
+                }
+
                 this.setState({
                     loadingAddPlaylist: false,
+                    addPlaylistDialog: false,
                 })
             })
         }
