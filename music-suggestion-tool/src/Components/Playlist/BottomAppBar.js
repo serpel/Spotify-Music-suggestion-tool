@@ -10,8 +10,8 @@ import NewIcon from '@material-ui/icons/Cached';
 //import MoreIcon from '@material-ui/icons/MoreVert';
 import AddPlaylistIcon from '@material-ui/icons/PlaylistAdd'
 import SongList from './SongList';
-import SongName from './SongName';
-import SongControl from './SongControl';
+import CurrentPlaying from './CurrentPlaying';
+import PlayerControls from './PlayerControls';
 
 function BottomAppBar(props) {
     const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, handleChange, onHandleNewRecomendationList, handleAddPlaylist } = props;
@@ -30,7 +30,7 @@ function BottomAppBar(props) {
             <IconButton color="inherit" onClick={handleAddPlaylist}>
                 <AddPlaylistIcon />
             </IconButton>
-            <SongName 
+            <CurrentPlaying 
               classes={classes} 
               name={state.currentSongName} 
               artist={state.currentSongArtist} 
@@ -48,7 +48,7 @@ function BottomAppBar(props) {
               {state.loading && <CircularProgress size={64} className={classes.fabProgress} />}
             </div>
 
-            <SongControl classes={classes} 
+            <PlayerControls classes={classes} 
               is_playing={state.is_playing}
               onHandlePlay={onHandlePlay} 
               onHandleNext={state.onHandleNext} 

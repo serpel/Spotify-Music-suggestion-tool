@@ -5,7 +5,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseArrowIcon from '@material-ui/icons/Pause';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 
-function SongControl(props) {
+function PlayerControls(props) {
     const { classes, is_playing, onHandlePrevious, onHandleNext, onHandlePlay } = props;
 
     return (
@@ -26,4 +26,4 @@ function SongControl(props) {
     );
   }
 
-export default SongControl;
+export default PlayerControls;

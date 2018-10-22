@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import IconBotton from '@material-ui/core/IconButton';
 
-function SongName(props){
+function CurrentPlaying(props){
     const { classes, name, artist, image } = props;
 
     return(
@@ -25,4 +25,4 @@ function SongName(props){
     )
 }
 
-export default SongName;
+export default CurrentPlaying;
