@@ -14,15 +14,16 @@ import CurrentPlaying from './CurrentPlaying';
 import PlayerControls from './PlayerControls';
 
 function BottomAppBar(props) {
-    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, handleChange, onHandleNewRecomendationList, handleAddPlaylist } = props;
+    const { classes, state, onHandlePlay, onHandleNext, onHandlePrevious, handleChange, onHandleNewRecomendationList, handleAddPlaylist, onHandleSaveTrackToUserLibrary } = props;
     return (
       <div className={classes.container}>
         <SongList 
             classes={classes} 
             state={state} 
+            onHandleSaveTrackToUserLibrary={onHandleSaveTrackToUserLibrary}
             onHandlePlay={onHandlePlay} 
-            onHandleNext={onHandleNext} 
             onHandlePrevious={onHandlePrevious}
+            onHandleNext={onHandleNext} 
             handleChange={handleChange} />
        
         <AppBar position="sticky" color="primary">
@@ -51,7 +52,7 @@ function BottomAppBar(props) {
             <PlayerControls classes={classes} 
               is_playing={state.is_playing}
               onHandlePlay={onHandlePlay} 
-              onHandleNext={state.onHandleNext} 
+              onHandleNext={onHandleNext} 
               onHandlePrevious={onHandlePrevious} />        
           </Toolbar>
         </AppBar>

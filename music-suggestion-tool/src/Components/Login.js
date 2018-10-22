@@ -40,7 +40,7 @@ class LoginComponent extends React.Component {
 
     onLoginSubmitHandler = (event) => {
         event.preventDefault();
-        window.location.href = "http://localhost:8888/v1/login"
+        window.location.href = process.env.REACT_APP_AUTH_API+'/login';
     }
 
     render(){

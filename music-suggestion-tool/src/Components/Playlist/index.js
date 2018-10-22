@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid'
 import Spotify from '../../Services/Spotify';
-//import SongList from './SongList'
 import TopAppBar from './TopAppBar';
 import BottomAppBar from './BottomAppBar';
 import AddPlaylistDialog from './AddPlaylistDialog';
@@ -153,6 +152,7 @@ class PlaylistComponent extends React.Component {
 
             this.spotify.recommendations(limit, genre)
             .then(result => {
+                console.log(result.data);
                 return result.data; 
             })
             .then(data =>{
@@ -227,6 +227,19 @@ class PlaylistComponent extends React.Component {
         this.getRecomendationList();
     }
 
+    onHandleSaveTrackToUserLibrary = (id) =>{
+
+        if(id){
+            this.spotify.saveTracksToUserLibrary(id)
+            .then(result => {
+                return result.data;
+            })
+            .then(data => {
+                console.log('succes save to library');
+            })
+        }
+    }
+
     onHandlePlay = () => {
         if(this.state.is_playing === true){
             this.spotify.pausePlayback()
@@ -245,6 +258,8 @@ class PlaylistComponent extends React.Component {
                 })
             })
         }
+
+        this.getCurrenPlayingSong();
     }
 
     onHandleNext = () => {
@@ -351,7 +366,8 @@ class PlaylistComponent extends React.Component {
                                 onHandlePrevious={this.onHandlePrevious}
                                 onHandleNewRecomendationList={this.onHandleNewRecomendationList}
                                 handleChange={this.handleChange}  
-                                handleAddPlaylist={this.handleAddPlaylist}       
+                                handleAddPlaylist={this.handleAddPlaylist}   
+                                onHandleSaveTrackToUserLibrary={this.onHandleSaveTrackToUserLibrary}    
                                 state={this.state}
                                 {...this.props} />
                 </Grid>

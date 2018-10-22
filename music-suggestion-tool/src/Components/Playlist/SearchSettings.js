@@ -55,7 +55,7 @@ const styles = theme => ({
     },
   });
 
-function CustomSearch(props){
+function SearchSettings(props){
 
     const { classes, genres, genre, handleChange, } = props;
 
@@ -112,4 +112,4 @@ function CustomSearch(props){
        );
 }
 
-export default withStyles(styles)(CustomSearch);
+export default withStyles(styles)(SearchSettings);

@@ -7,12 +7,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 
 import SearchSettings from './SearchSettings'
 
 function SongList(props){
 
-    const { classes, state, onHandlePlay, handleChange } = props;
+    const { classes, state, onHandleSaveTrackToUserLibrary, handleChange } = props;
 
     return (
         <Paper square className={classes.main}>
@@ -41,8 +42,8 @@ function SongList(props){
                                 <TableCell>{row.artists.map(artist => artist.name).join(' & ')}</TableCell>
                                 <TableCell component="th" scope="row">{row.album.name}</TableCell>
                                 <TableCell>
-                                    <Button onClick={onHandlePlay}>
-                                        Play
+                                    <Button onClick={() => onHandleSaveTrackToUserLibrary(row.id)}>
+                                        <AddIcon />
                                     </Button>
                                 </TableCell>
                             </TableRow>
