@@ -248,6 +248,7 @@ class PlaylistComponent extends React.Component {
                 this.setState({
                     is_playing : !this.state.is_playing
                 })
+                //this.getCurrenPlayingSong();
             })
         } else {
             this.spotify.playPlayback()
@@ -256,10 +257,10 @@ class PlaylistComponent extends React.Component {
                 this.setState({
                     is_playing : !this.state.is_playing
                 })
+                //this.getCurrenPlayingSong();
             })
         }
 
-        this.getCurrenPlayingSong();
     }
 
     onHandleNext = () => {
@@ -267,7 +268,7 @@ class PlaylistComponent extends React.Component {
         .then(result => {
             console.log("next click");
             //refresh current playing view
-            this.getCurrenPlayingSong();
+            setTimeout(() => { this.getCurrenPlayingSong() }, 1000);
         })
     }
 
@@ -276,7 +277,7 @@ class PlaylistComponent extends React.Component {
         .then(result => {
             console.log("back click");
             //refresh current playing view
-            this.getCurrenPlayingSong();
+            setTimeout(() => { this.getCurrenPlayingSong() }, 1000);
         })
     }
 
