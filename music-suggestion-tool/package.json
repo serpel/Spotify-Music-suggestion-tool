@@ -18,7 +18,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "mocha": "mocha --recursive --timeout 10000",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && aws s3 sync build/ s3://spotifymusictool --delete"
   },
   "eslintConfig": {
     "extends": "react-app"
