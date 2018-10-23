@@ -24,7 +24,7 @@ jobs:
 
       # change project path
       - run:
-        command: cd music-suggestion-tool
+          command: cd music-suggestion-tool
 
       # install project dependencies
       - run: npm install
