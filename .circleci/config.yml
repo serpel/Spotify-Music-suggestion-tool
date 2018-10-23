@@ -18,8 +18,8 @@ jobs:
 
     steps:
       - checkout:
-          path: ~/Spotify-Music-suggestion-tool/music-suggestion-tool
-      - run: npm install
+          path: ~/Spotify-Music-suggestion-tool
+      - run: cd music-suggestion-tool && npm install
 
       # Download and cache dependencies
       - restore_cache:
