@@ -17,8 +17,7 @@ jobs:
     working_directory: ~/repo/music-suggestion-tool
 
     steps:
-      - checkout:
-	path: ~/repo
+      - checkout
 
       # Download and cache dependencies
       - restore_cache:
