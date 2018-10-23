@@ -4,7 +4,7 @@
   "description": "Music Suggestion tool api",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "mocha --recursive"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "cookie-parser": "^1.4.3",
     "cookieparser": "^0.1.0",
     "cors": "^2.8.4",

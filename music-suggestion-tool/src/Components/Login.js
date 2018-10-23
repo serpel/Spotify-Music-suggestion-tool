@@ -18,7 +18,7 @@ const styles = theme => ({
         padding: theme.spacing.unit * 2,
         height: '100vh',
     },
-    container: {
+    login: {
         //backgroundColor: theme.palette.background.paper,
     },
     button: {
@@ -53,12 +53,12 @@ class LoginComponent extends React.Component {
 
         return (
             <Paper className={classes.root}>
-               <Grid container spacing={12}>
+               <Grid container>
                     <Grid item xs={4}>
                     </Grid>
-                    <Grid item xs={1} sm container className={classes.container}>
-                        <form onSubmit={this.onLoginSubmitHandler}>
-                            <Button variant="contained" color="default" type="submit" className={classes.button} >
+                    <Grid item xs={1} sm container>
+                        <form onSubmit={this.onLoginSubmitHandler} className={classes.login} >
+                            <Button color="default" type="submit" className={classes.button} >
                                 <img src={SpotifyIcon} alt="spotify" className={classes.extendedIcon} />
                                 Login With Spotify
                             </Button>

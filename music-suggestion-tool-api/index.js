@@ -63,9 +63,12 @@ app.use(function(err, req, res, next){
     
 })*/
 
-app.get('/clear_access_token', function(req, res){
-    res.clearCookie('access_token');
-    res.send('cookie access_token cleared');
+app.get('/v1/clear_access_token', function(req, res){
+
+    console.log('Cookies to delete: ', req.cookies)
+    res.clearCookie(stateKey);
+    console.log('Cookies: ', req.cookies)
+    //res.redirect('http://localhost:3000/login');
 });
 
 app.get("/v1/login", function(req, res){

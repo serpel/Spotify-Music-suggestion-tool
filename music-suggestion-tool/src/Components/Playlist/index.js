@@ -152,7 +152,7 @@ class PlaylistComponent extends React.Component {
 
             this.spotify.recommendations(limit, genre)
             .then(result => {
-                console.log(result.data);
+                //console.log(result.data);
                 return result.data; 
             })
             .then(data =>{
@@ -301,6 +301,16 @@ class PlaylistComponent extends React.Component {
             addPlaylistDialog: false,
         })
     } 
+
+    onHandleLogout = () => {
+
+        console.log("entro en logout");
+        var url = `${process.env.REACT_APP_AUTH_API}/clear_access_token`;
+
+        fetch(url);
+
+        window.location = "/login";
+    }
     
     onHandleAddPlaylistSubmit = () => {
 

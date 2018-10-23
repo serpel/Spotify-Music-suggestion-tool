@@ -8,7 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu'
 
 function TopAppBar(props) {
-    const { classes, profileImg, profileName } = props;
+    const { classes, profileImg, profileName, onHandleLogout } = props;
     return (
       <div className={classes.root}>
         <AppBar position="static" >
@@ -21,10 +21,10 @@ function TopAppBar(props) {
                 src={profileImg}
                 className={classes.avatar}
             />
-            <Typography variant="h6" color="inherit" className={classes.grow}>
+            <Typography variant="title" color="inherit" className={classes.grow}>
                 Welcome: {profileName}
             </Typography>          
-            <Button color="inherit" className={classes.logout}>Logout</Button>
+            <Button color="inherit" className={classes.logout} onClick={onHandleLogout}>Logout</Button>
           </Toolbar>
         </AppBar>
       </div>

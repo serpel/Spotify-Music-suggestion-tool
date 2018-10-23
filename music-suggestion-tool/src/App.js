@@ -21,6 +21,7 @@ class App extends Component {
         <Router>
           <React.Fragment>
             <div>
+              <Route exact path="/" component={Login}/>
               <Route exact path="/login" component={Login}/>
               <Route exact path="/playlist" component={Playlist}/>
             </div>

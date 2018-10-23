@@ -18,10 +18,10 @@ const styles = theme => ({
       width: '100%',
     },
     heading: {
-      fontSize: theme.typography.pxToRem(15),
+      //fontSize: theme.typography.pxToRem(15),
     },
     secondaryHeading: {
-      fontSize: theme.typography.pxToRem(15),
+      //fontSize: theme.typography.pxToRem(15),
       color: theme.palette.text.secondary,
     },
     icon: {
@@ -100,7 +100,7 @@ function SearchSettings(props){
                         </Select>                     
                     </div>
                     <div className={classes.column}>
-                    <Typography variant="caption">
+                    <Typography variant="subheading">
                         Select music genre
                         <br />
                     </Typography>
