@@ -23,7 +23,7 @@ jobs:
           path: ~/Spotify-Music-suggestion-tool
 
       # install project dependencies
-      - run: npm install
+      - run: cd music-suggestion-tool && npm install
 
       # Download and cache dependencies
       - restore_cache:
@@ -38,7 +38,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: cd music-suggestion-tool && yarn test
+      - run: cd music-suggestion-tool && nom test
       - run: sudo apt-get update && sudo apt-get install -y python-dev
 
 
