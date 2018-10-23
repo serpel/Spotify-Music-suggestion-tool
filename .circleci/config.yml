@@ -17,9 +17,17 @@ jobs:
     working_directory: ~/Spotify-Music-suggestion-tool
 
     steps:
+
+      # make git checkout
       - checkout:
           path: ~/Spotify-Music-suggestion-tool
-      - run: cd music-suggestion-tool && npm install
+
+      # change project path
+      - run:
+        command: cd music-suggestion-tool
+
+      # install project dependencies
+      - run: npm install
 
       # Download and cache dependencies
       - restore_cache:
