@@ -39,6 +39,7 @@ jobs:
 
 
       # run deploy
+      - run: ls -l ~/music-suggestion-tool
       - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
       - run: sudo python get-pip.py
       - run: sudo pip install awscli --upgrade
