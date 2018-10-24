@@ -81,4 +81,4 @@ jobs:
                 sudo pip install awsebcli --upgrade
       - run:
           name: "Deploy node API to AWS"
-          command: "cd music-suggestion-tool-api && eb deploy --profile default"
+          command: "cd music-suggestion-tool && eb deploy --profile default"
