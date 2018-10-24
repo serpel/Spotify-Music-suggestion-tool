@@ -11,7 +11,7 @@ environment-defaults:
 global:
   application_name: music-suggestion-tool
   branch: null
-  default_ec2_keyname: aws-eb
+  default_ec2_keyname: null
   default_platform: Node.js
   default_region: us-west-1
   include_git_submodules: true
