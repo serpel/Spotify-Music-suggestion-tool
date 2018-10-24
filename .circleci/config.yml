@@ -23,7 +23,9 @@ jobs:
           path: ~/Spotify-Music-suggestion-tool
 
       # install project dependencies
-      - run: cd music-suggestion-tool && npm install
+      - run: 
+         name: "Running npm install"
+         command: cd music-suggestion-tool && npm install
 
       # Download and cache dependencies
       - restore_cache:
@@ -38,20 +40,24 @@ jobs:
           key: v1-dependencies-{{ checksum "music-suggestion-tool/package.json" }}
         
       # run tests!
-      - run: cd music-suggestion-tool && npm test
-      - run: sudo apt-get update && sudo apt-get install -y python-dev
-
-      # run deploy
       - run: 
-          name: "Instaling packages dependencies"
+         name: "Running testing"
+         command: cd music-suggestion-tool && npm test
+
+
+      - run: 
+          name: "Instaling linux packages dependencies"
           command: |
+              sudo apt-get update && sudo apt-get install -y python-dev
               sudo curl -O https://bootstrap.pypa.io/get-pip.py
               sudo python get-pip.py
               sudo pip install awscli --upgrade
+      # run s3 deploy
       - run: 
           name: "Deploy react js app to AWS"
-          command: "cd music-suggestion-tool && aws s3 ls"
-      - run: cd music-suggestion-tool && yarn run deploy  
+          command: |
+            cd music-suggestion-tool && aws s3 ls
+            cd music-suggestion-tool && yarn run deploy  
 
       - restore_cache:
           keys:
@@ -69,9 +75,8 @@ jobs:
       - run:
           name: "Installing awsebcli dependencies"
           command: |
-                sudo apt-get -y -qq update
+                sudo apt-get update && sudo apt-get install -y python-dev build-essential
                 sudo curl -O https://bootstrap.pypa.io/get-pip.py
-                sudo apt-get install python-dev build-essential
                 sudo python get-pip.py
                 sudo pip install awsebcli --upgrade
       - run:
