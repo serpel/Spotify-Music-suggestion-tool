@@ -23,29 +23,40 @@ jobs:
           path: ~/Spotify-Music-suggestion-tool
 
       # install project dependencies
-      - run: cd music-suggestion-tool && npm install
+      - run: 
+         name: "Running npm install"
+         command: npm install
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "music-suggestion-tool/package.json" }}
+          - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "music-suggestion-tool/package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: cd music-suggestion-tool && npm test
-      - run: sudo apt-get update && sudo apt-get install -y python-dev
+      - run: 
+         name: "Running testing"
+         command: npm test
 
 
-      # run deploy
-      - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
-      - run: sudo python get-pip.py
-      - run: sudo pip install awscli --upgrade
-      - run: aws --version
-      - run: cd music-suggestion-tool && aws s3 ls
-      - run: cd music-suggestion-tool && yarn run deploy
+      - run: 
+          name: "Instaling linux packages dependencies"
+          command: |
+              sudo apt-get update && sudo apt-get install -y python-dev
+              sudo curl -O https://bootstrap.pypa.io/get-pip.py
+              sudo python get-pip.py
+              sudo pip install awscli --upgrade
+      # run s3 deploy
+      - run: 
+          name: "Deploy react js app to AWS"
+          command: |
+            aws s3 ls
+            yarn run deploy  
+            
+
