@@ -19,8 +19,8 @@ jobs:
     steps:
 
       # make git checkout
-      - checkout:
-          path: ~/Spotify-Music-suggestion-tool
+      - checkout
+          #path: ~/Spotify-Music-suggestion-tool
 
       # install project dependencies
       - run: cd music-suggestion-tool && npm install
@@ -58,6 +58,16 @@ jobs:
        
       api:
         steps:
+         - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "music-suggestion-tool-api/package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+        - save_cache:
+            paths:
+              - node_modules
+            key: v1-dependencies-{{ checksum "music-suggestion-tool-api/package.json" }}
          - run: 
              name: "Instaling npm packages dependencies"
              command: cd music-suggestion-tool-api && npm install
