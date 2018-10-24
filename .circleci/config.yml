@@ -53,11 +53,11 @@ jobs:
               sudo python get-pip.py
               sudo pip install awscli --upgrade
       # run s3 deploy
-      - run: 
-          name: "Deploy react js app to AWS"
-          command: |
-            cd music-suggestion-tool && aws s3 ls
-            cd music-suggestion-tool && yarn run deploy  
+      #- run: 
+      #    name: "Deploy react js app to AWS"
+      #    command: |
+      #      cd music-suggestion-tool && aws s3 ls
+      #      cd music-suggestion-tool && yarn run deploy  
 
       - restore_cache:
           keys:
