@@ -25,24 +25,24 @@ jobs:
       # install project dependencies
       - run: 
          name: "Running npm install"
-         command: cd music-suggestion-tool && npm install
+         command: npm install
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "music-suggestion-tool/package.json" }}
+          - v1-dependencies-{{ checksum "package.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "music-suggestion-tool/package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
       - run: 
          name: "Running testing"
-         command: cd music-suggestion-tool && npm test
+         command: npm test
 
 
       - run: 
@@ -53,32 +53,9 @@ jobs:
               sudo python get-pip.py
               sudo pip install awscli --upgrade
       # run s3 deploy
-      #- run: 
-      #    name: "Deploy react js app to AWS"
-      #    command: |
-      #      cd music-suggestion-tool && aws s3 ls
-      #      cd music-suggestion-tool && yarn run deploy  
-
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "music-suggestion-tool-api/package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - save_cache:
-         paths:
-            - node_modules
-         key: v1-dependencies-{{ checksum "music-suggestion-tool-api/package.json" }}
       - run: 
-          name: "Instaling npm packages dependencies"
-          command: cd music-suggestion-tool-api && npm install
-      - run:
-          name: "Installing awsebcli dependencies"
+          name: "Deploy react js app to AWS"
           command: |
-                sudo apt-get update && sudo apt-get install -y python-dev build-essential
-                sudo curl -O https://bootstrap.pypa.io/get-pip.py
-                sudo python get-pip.py
-                sudo pip install awsebcli --upgrade
-      - run:
-          name: "Deploy node API to AWS"
-          command: "cd music-suggestion-tool && eb deploy --profile default"
+            aws s3 ls
+            yarn run deploy  
+
