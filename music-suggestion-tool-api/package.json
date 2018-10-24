@@ -4,7 +4,9 @@
   "description": "Music Suggestion tool api",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "build": "npm run-script build",
+    "deploy": "aws s3 sync build/ s3://spotifymusictoolapi --delete"
   },
   "repository": {
     "type": "git",
