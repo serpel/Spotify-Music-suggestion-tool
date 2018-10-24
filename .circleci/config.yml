@@ -19,8 +19,8 @@ jobs:
     steps:
 
       # make git checkout
-      - checkout
-          #path: ~/Spotify-Music-suggestion-tool
+      - checkout:
+          path: ~/Spotify-Music-suggestion-tool
 
       # install project dependencies
       - run: cd music-suggestion-tool && npm install
@@ -43,21 +43,19 @@ jobs:
 
 
       # run deploy
-      deploy:
-        steps:
-          - run: 
-             name: "Instaling packages dependencies"
-             command: |
-                sudo curl -O https://bootstrap.pypa.io/get-pip.py
-                sudo python get-pip.py
-                sudo pip install awscli --upgrade
-          - run: 
-             name: "Deploy react js app to AWS"
-             command: "cd music-suggestion-tool && aws s3 ls"
-          - run: cd music-suggestion-tool && yarn run deploy
-       
-      api:
-        steps:
+      - run: 
+          name: "Instaling packages dependencies"
+          command: |
+              sudo curl -O https://bootstrap.pypa.io/get-pip.py
+              sudo python get-pip.py
+              sudo pip install awscli --upgrade
+      - run: 
+          name: "Deploy react js app to AWS"
+          command: "cd music-suggestion-tool && aws s3 ls"
+      - run: cd music-suggestion-tool && yarn run deploy
+    
+    deploy:   
+      steps:
          - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "music-suggestion-tool-api/package.json" }}
@@ -68,17 +66,17 @@ jobs:
             paths:
               - node_modules
             key: v1-dependencies-{{ checksum "music-suggestion-tool-api/package.json" }}
-         - run: 
+        - run: 
              name: "Instaling npm packages dependencies"
              command: cd music-suggestion-tool-api && npm install
-           - run:
-              name: "Installing awsebcli dependencies"
-              command: |
+        - run:
+            name: "Installing awsebcli dependencies"
+            command: |
                 sudo apt-get -y -qq update
                 sudo curl -O https://bootstrap.pypa.io/get-pip.py
                 sudo apt-get install python-dev build-essential
                 sudo python get-pip.py
                 sudo pip install awsebcli --upgrade
-           - run:
-               name: "Deploy node API to AWS"
-               command: "cd music-suggestion-tool-api && eb deploy"
+        - run:
+            name: "Deploy node API to AWS"
+            command: "cd music-suggestion-tool-api && eb deploy"
